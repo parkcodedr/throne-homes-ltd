@@ -1,0 +1,94 @@
+header.horizontal-header .main-menu .menu .menu-item.menu-btn .btn{
+    background: #ef812e !important;
+}
+
+header.horizontal-header .main-menu .menu .menu-item.menu-btn .btn{
+    background: #ef812e !important;
+}
+
+.text-orange{
+    color: #ef812e!important;
+}
+
+.borderless::after {
+    display: none;
+}
+
+.img-hov a:hover img{
+    opacity: .6;
+}
+
+#promo1 .bttm_info{
+    position: absolute;
+    bottom: 30px;
+    width: 60%;
+    background: rgba(237,115,22,.9);
+    padding: 20px 15px;
+}
+
+#promo1 .bttm_text{
+    border-left:  5px solid #fff;
+    padding-left: 10px;
+}
+
+#promo1 .bttm_text h1{
+    color: #fff;
+    padding-bottom: 0;
+    margin-bottom: 0;
+}
+
+#promo1 .bttm_text h6{
+    color: #fff;
+}
+
+#promo1 .bttn-white{
+    border: 3px solid #fff;
+    padding: 10px 20px;
+    color: #fff;
+    background: none!important;
+}
+
+#promo1 .bttn-white:hover{
+    background: #fff!important;
+    padding: 10px 20px;
+    color: #ef812e!important;
+}
+
+#promo2 .bttm_info{
+    position: absolute;
+    bottom: 30px;
+    right: 0;
+    width: 60%;
+    background: rgba(237,115,22,.9);
+    padding: 20px 15px;
+}
+
+#promo2 .bttm_text{
+    border-right:  5px solid #fff;
+    padding-right: 10px;
+}
+
+#promo2 .bttm_text h1{
+    color: #fff;
+    padding-bottom: 0;
+    margin-bottom: 0;
+    text-align: right;
+}
+
+#promo2 .bttm_text h6{
+    color: #fff;
+    text-align: right;
+}
+
+#promo2 .bttn-white{
+    border: 3px solid #fff;
+    padding: 10px 20px;
+    color: #fff;
+    background: none!important;
+}
+
+#promo2 .bttn-white:hover{
+    background: #fff!important;
+    padding: 10px 20px;
+    color: #ef812e!important;
+}
