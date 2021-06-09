@@ -8,19 +8,13 @@ Version:       1.1.0
 /* Small devices (landscape phones, 576px and up) */
 
 @media (min-width: 576px) {
-  header {
-    position: inherit;
-    
-  }
+ 
 }
 
 /* Medium devices (tablets, 768px and up) */
 
 @media (min-width: 768px) {
-  header {
-    position: inherit;
-    
-  }
+ 
 }
 
 /* Large devices (desktops, 992px and up) */
