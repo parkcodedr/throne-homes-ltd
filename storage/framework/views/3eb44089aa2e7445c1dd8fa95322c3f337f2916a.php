@@ -11,9 +11,16 @@
         <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
             <div class="menu_section">
                 <ul class="nav side-menu">
+                    <li class=""><a href="<?php echo e(url('/home')); ?>"><i class="fa fa-home"></i> Dashboard -
+                        <?php echo e($role); ?></a></li>
+                        <li class=""><a><i class="fa fa-bed"></i> Lands <span class="fa fa-chevron-down"></span></a>
+                            <ul class="nav child_menu">
+                                <li><a href="view_land">Lands & Prices</a></li>
+                                <li><a href="land_growth">Lands Growth</a></li>
+                            </ul>
+                        </li>
                     <?php if($role == 'super'): ?>
-                        <li class=""><a href="<?php echo e(url('/home')); ?>"><i class="fa fa-home"></i> Dashboard -
-                                <?php echo e($role); ?></a></li>
+                        
                         <li class=""><a><i class="fa fa-book"></i> Subscriptions <span
                                     class="fa fa-chevron-down"></span></a>
                             <ul class="nav child_menu">
@@ -21,11 +28,7 @@
                                 <li><a href="#">Houses' Subscriptions</a></li>
                             </ul>
                         </li>
-                        <li class=""><a><i class="fa fa-bed"></i> Lands <span class="fa fa-chevron-down"></span></a>
-                            <ul class="nav child_menu">
-                                <li><a href="#">Lands and Prices</a></li>
-                            </ul>
-                        </li>
+                       
                         <li class=""><a><i class="fa fa-ticket"></i> Houses <span class="fa fa-chevron-down"></span></a>
                             <ul class="nav child_menu">
                                 <li><a href="#">Houses and Prices</a></li>
@@ -50,8 +53,7 @@
                     <?php endif; ?>
 
                     <?php if($role == 'admin'): ?>
-                        <li class=""><a href="<?php echo e(url('/home')); ?>"><i class="fa fa-home"></i> Dashboard -
-                                <?php echo e($role); ?></a></li>
+                       
                         <li class=""><a><i class="fa fa-book"></i> Subscriptions <span
                                     class="fa fa-chevron-down"></span></a>
                             <ul class="nav child_menu">
@@ -59,11 +61,7 @@
                                 <li><a href="#">Houses' Subscriptions</a></li>
                             </ul>
                         </li>
-                        <li class=""><a><i class="fa fa-bed"></i> Lands <span class="fa fa-chevron-down"></span></a>
-                            <ul class="nav child_menu">
-                                <li><a href="#">Lands and Prices</a></li>
-                            </ul>
-                        </li>
+                       
                         <li class=""><a><i class="fa fa-ticket"></i> Houses <span class="fa fa-chevron-down"></span></a>
                             <ul class="nav child_menu">
                                 <li><a href="#">Houses and Prices</a></li>
@@ -88,8 +86,7 @@
                     <?php endif; ?>
 
                     <?php if($role == 'user'): ?>
-                        <li class=""><a href="<?php echo e(url('/home')); ?>"><i class="fa fa-home"></i> Dashboard -
-                                <?php echo e($role); ?></a></li>
+                        
                         <li class=""><a><i class="fa fa-book"></i> Subscriptions <span
                                     class="fa fa-chevron-down"></span></a>
                             <ul class="nav child_menu">
@@ -143,8 +140,7 @@
                     <?php endif; ?>
 
                     <?php if($role == 'frontdesk'): ?>
-                        <li class=""><a href="<?php echo e(url('/home')); ?>"><i class="fa fa-home"></i> Dashboard -
-                                <?php echo e($role); ?></a></li>
+                       
                         <li class=""><a><i class="fa fa-book"></i> Subscriptions <span
                                     class="fa fa-chevron-down"></span></a>
                             <ul class="nav child_menu">
@@ -152,11 +148,7 @@
                                 <li><a href="#">Houses' Subscriptions</a></li>
                             </ul>
                         </li>
-                        <li class=""><a><i class="fa fa-bed"></i> Lands <span class="fa fa-chevron-down"></span></a>
-                            <ul class="nav child_menu">
-                                <li><a href="#">Lands & Prices</a></li>
-                            </ul>
-                        </li>
+                       
                         <li class=""><a><i class="fa fa-ticket"></i> Houses <span class="fa fa-chevron-down"></span></a>
                             <ul class="nav child_menu">
                                 <li><a href="#">Houses & Prices</a></li>
@@ -165,13 +157,7 @@
                     <?php endif; ?>
 
                     <?php if($role == 'architectural'): ?>
-                        <li class=""><a href="<?php echo e(url('/home')); ?>"><i class="fa fa-home"></i> Dashboard -
-                                <?php echo e($role); ?></a></li>
-                        <li class=""><a><i class="fa fa-bed"></i> Lands <span class="fa fa-chevron-down"></span></a>
-                            <ul class="nav child_menu">
-                                <li><a href="view_land">Lands & Prices</a></li>
-                            </ul>
-                        </li>
+                        
                         <li class=""><a><i class="fa fa-ticket"></i> Houses <span class="fa fa-chevron-down"></span></a>
                             <ul class="nav child_menu">
                                 <li><a href="view_house">Houses & Prices</a></li>
@@ -193,6 +179,7 @@
                             </ul>
                         </li>
                     <?php endif; ?>
+                   
                 </ul>
             </div>
 

@@ -22,6 +22,12 @@ class DaomniProjectsController extends Controller
     {
         //
     }
+    public function landGrowth()
+    {
+        $generalinfo['total_lands'] = Daomniorder::where('id', '>', 0)->orderBy('id', 'desc')->count('id');
+
+        return view('admin/view_land_growth', $generalinfo);
+    }
 
     public function projectLand()
     {
@@ -82,8 +88,9 @@ class DaomniProjectsController extends Controller
         $agent = Auth::user()->name;
         $generalinfo['orders'] = Daomniorder::where("agent", $agent)->join("daomni_landtypes", "daomni_landtypes.id", "daomniorders.daomnilandtypes_id")
             ->where("daomni_landtypes.page_name", "Lands")
-            ->select(["daomniorders.firstname", "daomniorders.lastname", "daomniorders.payment_plan", "daomniorders.order_price"
-                , "daomniorders.price_pay", "daomniorders.created_at", "daomni_landtypes.lands_name"])->get();
+            ->select([
+                "daomniorders.firstname", "daomniorders.lastname", "daomniorders.payment_plan", "daomniorders.order_price", "daomniorders.price_pay", "daomniorders.created_at", "daomni_landtypes.lands_name"
+            ])->get();
         $generalinfo['projects'] = Daomniprojects::where("project_type", "land")->get();
         return view('admin/availableland', $generalinfo);
     }
@@ -146,8 +153,9 @@ class DaomniProjectsController extends Controller
         $agent = Auth::user()->name;
         $generalinfo['orders'] = Daomniorder::where("agent", $agent)->join("daomni_landtypes", "daomni_landtypes.id", "daomniorders.daomnilandtypes_id")
             ->where("daomni_landtypes.page_name", "Lands")
-            ->select(["daomniorders.firstname", "daomniorders.lastname", "daomniorders.payment_plan", "daomniorders.order_price"
-                , "daomniorders.price_pay", "daomniorders.created_at", "daomni_landtypes.lands_name"])->get();
+            ->select([
+                "daomniorders.firstname", "daomniorders.lastname", "daomniorders.payment_plan", "daomniorders.order_price", "daomniorders.price_pay", "daomniorders.created_at", "daomni_landtypes.lands_name"
+            ])->get();
 
         $generalinfo['projects'] = Daomniprojects::where("project_type", "house")->get();
         return view('admin/availablehouse', $generalinfo);
@@ -212,8 +220,9 @@ class DaomniProjectsController extends Controller
         $agent = Auth::user()->name;
         $generalinfo['orders'] = Daomniorder::where("agent", $agent)->join("daomni_landtypes", "daomni_landtypes.id", "daomniorders.daomnilandtypes_id")
             ->where("daomni_landtypes.page_name", "Lands")
-            ->select(["daomniorders.firstname", "daomniorders.lastname", "daomniorders.payment_plan", "daomniorders.order_price"
-                , "daomniorders.price_pay", "daomniorders.created_at", "daomni_landtypes.lands_name"])->get();
+            ->select([
+                "daomniorders.firstname", "daomniorders.lastname", "daomniorders.payment_plan", "daomniorders.order_price", "daomniorders.price_pay", "daomniorders.created_at", "daomni_landtypes.lands_name"
+            ])->get();
 
         return view('admin/add_land', $generalinfo);
     }
@@ -277,11 +286,11 @@ class DaomniProjectsController extends Controller
         $agent = Auth::user()->name;
         $generalinfo['orders'] = Daomniorder::where("agent", $agent)->join("daomni_landtypes", "daomni_landtypes.id", "daomniorders.daomnilandtypes_id")
             ->where("daomni_landtypes.page_name", "Lands")
-            ->select(["daomniorders.firstname", "daomniorders.lastname", "daomniorders.payment_plan", "daomniorders.order_price"
-                , "daomniorders.price_pay", "daomniorders.created_at", "daomni_landtypes.lands_name"])->get();
+            ->select([
+                "daomniorders.firstname", "daomniorders.lastname", "daomniorders.payment_plan", "daomniorders.order_price", "daomniorders.price_pay", "daomniorders.created_at", "daomni_landtypes.lands_name"
+            ])->get();
 
         return view('admin/add_house', $generalinfo);
-
     }
 
     public function addLand(Request $request)
@@ -351,7 +360,6 @@ class DaomniProjectsController extends Controller
             $project = Daomniprojects::where("id", $projectid)->first();
             $project->feature_image = $folder . $feature_image;
             $project->update();
-
         }
     }
     public function getSiteinfosextract($admin_id)

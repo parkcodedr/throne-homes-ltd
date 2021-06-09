@@ -11,27 +11,27 @@
 |
  */
 
-Route::get('/configcache', function() {
+Route::get('/configcache', function () {
     Artisan::call('config:cache');
     return "Cache is configured and cleared";
 });
 
-Route::get('/clearcache', function() {
+Route::get('/clearcache', function () {
     Artisan::call('cache:clear');
     return "Cache is cleared";
 });
 
-Route::get('/clearview', function() {
+Route::get('/clearview', function () {
     Artisan::call('view:clear');
     return "View is cleared";
 });
 
-Route::get('/clearroute', function() {
+Route::get('/clearroute', function () {
     Artisan::call('route:clear');
     return "Route is cleared";
 });
 
-Route::get('/clearconfig', function() {
+Route::get('/clearconfig', function () {
     Artisan::call('config:clear');
     return "Config is cleared";
 });
@@ -89,6 +89,7 @@ Route::get('/influencer_setting', 'DaomniInfluentialcouponsController@settings')
 Route::post('/update_code', 'DaomniInfluentialcouponsController@update_agentcode')->name('update_code');
 
 Route::get('/view_land', 'DaomniProjectsController@projectLand')->name('lands')->middleware('auth');
+Route::get('/view_land_growth', 'DaomniProjectsController@landGrowth')->name('lands')->middleware('auth');
 Route::get('/view_house', 'DaomniProjectsController@projectHouse')->name('houses')->middleware('auth');
 Route::get('/add_land', 'DaomniProjectsController@addprojectLand')->name('addland')->middleware('auth');
 Route::get('/add_house', 'DaomniProjectsController@addprojectHouse')->name('addhouse')->middleware('auth');
