@@ -33,8 +33,8 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         $schedule->call(function () {
-            DB::table('land_growth')->update();
-        })->daily();
+            DB::table('land_growth')->update(["growth_value" => 200]);
+        })->everyFiveMinutes();;
     }
 
     /**
