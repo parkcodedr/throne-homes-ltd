@@ -11,16 +11,9 @@
         <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
             <div class="menu_section">
                 <ul class="nav side-menu">
-                    <li class=""><a href="{{ url('/home') }}"><i class="fa fa-home"></i> Dashboard -
-                        {{ $role }}</a></li>
-                        <li class=""><a><i class="fa fa-bed"></i> Lands <span class="fa fa-chevron-down"></span></a>
-                            <ul class="nav child_menu">
-                                <li><a href="view_land">Lands & Prices</a></li>
-                                <li><a href="view_land_growth">Lands Growth</a></li>
-                            </ul>
-                        </li>
                     @if ($role == 'super')
-                        
+                        <li class=""><a href="{{ url('/home') }}"><i class="fa fa-home"></i> Dashboard -
+                                {{ $role }}</a></li>
                         <li class=""><a><i class="fa fa-book"></i> Subscriptions <span
                                     class="fa fa-chevron-down"></span></a>
                             <ul class="nav child_menu">
@@ -28,7 +21,12 @@
                                 <li><a href="#">Houses' Subscriptions</a></li>
                             </ul>
                         </li>
-                       
+                        <li class=""><a><i class="fa fa-bed"></i> Lands <span class="fa fa-chevron-down"></span></a>
+                            <ul class="nav child_menu">
+                                <li><a href="#">Lands and Prices</a></li>
+                                <li><a href="/view_land_growth">Lands growth</a></li>
+                            </ul>
+                        </li>
                         <li class=""><a><i class="fa fa-ticket"></i> Houses <span class="fa fa-chevron-down"></span></a>
                             <ul class="nav child_menu">
                                 <li><a href="#">Houses and Prices</a></li>
@@ -53,7 +51,8 @@
                     @endif
 
                     @if ($role == 'admin')
-                       
+                        <li class=""><a href="{{ url('/home') }}"><i class="fa fa-home"></i> Dashboard -
+                                {{ $role }}</a></li>
                         <li class=""><a><i class="fa fa-book"></i> Subscriptions <span
                                     class="fa fa-chevron-down"></span></a>
                             <ul class="nav child_menu">
@@ -61,7 +60,12 @@
                                 <li><a href="#">Houses' Subscriptions</a></li>
                             </ul>
                         </li>
-                       
+                        <li class=""><a><i class="fa fa-bed"></i> Lands <span class="fa fa-chevron-down"></span></a>
+                            <ul class="nav child_menu">
+                                <li><a href="#">Lands and Prices</a></li>
+                                <li><a href="/view_land_growth">Lands growth</a></li>
+                            </ul>
+                        </li>
                         <li class=""><a><i class="fa fa-ticket"></i> Houses <span class="fa fa-chevron-down"></span></a>
                             <ul class="nav child_menu">
                                 <li><a href="#">Houses and Prices</a></li>
@@ -86,7 +90,8 @@
                     @endif
 
                     @if ($role == 'user')
-                        
+                        <li class=""><a href="{{ url('/home') }}"><i class="fa fa-home"></i> Dashboard -
+                                {{ $role }}</a></li>
                         <li class=""><a><i class="fa fa-book"></i> Subscriptions <span
                                     class="fa fa-chevron-down"></span></a>
                             <ul class="nav child_menu">
@@ -142,7 +147,8 @@
                     @endif
 
                     @if ($role == 'frontdesk')
-                       
+                        <li class=""><a href="{{ url('/home') }}"><i class="fa fa-home"></i> Dashboard -
+                                {{ $role }}</a></li>
                         <li class=""><a><i class="fa fa-book"></i> Subscriptions <span
                                     class="fa fa-chevron-down"></span></a>
                             <ul class="nav child_menu">
@@ -150,7 +156,12 @@
                                 <li><a href="#">Houses' Subscriptions</a></li>
                             </ul>
                         </li>
-                       
+                        <li class=""><a><i class="fa fa-bed"></i> Lands <span class="fa fa-chevron-down"></span></a>
+                            <ul class="nav child_menu">
+                                <li><a href="#">Lands and Prices</a></li>
+                                <li><a href="/view_land_growth">Lands growth</a></li>
+                            </ul>
+                        </li>
                         <li class=""><a><i class="fa fa-ticket"></i> Houses <span class="fa fa-chevron-down"></span></a>
                             <ul class="nav child_menu">
                                 <li><a href="#">Houses & Prices</a></li>
@@ -159,7 +170,14 @@
                     @endif
 
                     @if ($role == 'architectural')
-                        
+                        <li class=""><a href="{{ url('/home') }}"><i class="fa fa-home"></i> Dashboard -
+                                {{ $role }}</a></li>
+                        <li class=""><a><i class="fa fa-bed"></i> Lands <span class="fa fa-chevron-down"></span></a>
+                            <ul class="nav child_menu">
+                                <li><a href="/view_land">Lands and Prices</a></li>
+                                <li><a href="/view_land_growth">Lands growth</a></li>
+                            </ul>
+                        </li>
                         <li class=""><a><i class="fa fa-ticket"></i> Houses <span class="fa fa-chevron-down"></span></a>
                             <ul class="nav child_menu">
                                 <li><a href="view_house">Houses & Prices</a></li>
@@ -181,7 +199,6 @@
                             </ul>
                         </li>
                     @endif
-                   
                 </ul>
             </div>
 

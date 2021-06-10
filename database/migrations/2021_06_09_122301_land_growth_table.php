@@ -14,9 +14,11 @@ class LandGrowthTable extends Migration
     public function up()
     {
         Schema::create('land_growth', function (Blueprint $table) {
-            $table->integer('land_id');
+            $table->integer('id');
+            $table->string('land_name');
+            $table->integer('land_price');
             $table->float('growth_value');
-            $table->primary('land_id');
+            $table->primary('id');
             $table->timestamps();
         });
     }
