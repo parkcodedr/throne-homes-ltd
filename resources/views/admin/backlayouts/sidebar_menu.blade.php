@@ -16,7 +16,7 @@
                         <li class=""><a><i class="fa fa-bed"></i> Lands <span class="fa fa-chevron-down"></span></a>
                             <ul class="nav child_menu">
                                 <li><a href="view_land">Lands & Prices</a></li>
-                                <li><a href="land_growth">Lands Growth</a></li>
+                                <li><a href="view_land_growth">Lands Growth</a></li>
                             </ul>
                         </li>
                     @if ($role == 'super')

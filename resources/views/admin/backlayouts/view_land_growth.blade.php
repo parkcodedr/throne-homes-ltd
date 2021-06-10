@@ -56,8 +56,9 @@
                                     <thead>
                                         <tr>
                                             <th>Title</th>
-                                            <th>Cost</th>
                                             <th>Price</th>
+                                            <th>Current Value</th>
+                                            <th>Growth Value</th>
                                             <th>Entry Date</th>
                                             <th>Action</th>
 

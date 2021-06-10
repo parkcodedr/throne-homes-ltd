@@ -2,14 +2,18 @@
 
 namespace App\Http\Controllers;
 
-use App\Daomniorder;
-use App\DaomniprojectImage;
-use App\Daomniprojects;
-use App\Daomnirole;
-use App\Daomnisettingsiteinfos;
-use App\User;
 use Auth;
+use App\User;
+use App\Daomnirole;
+use App\LandGrowth;
+use App\Daomniorder;
+use App\Daomniprojects;
+use App\LandGrowthRate;
+use App\Daomnilandtypes;
+use App\DaomniprojectImage;
 use Illuminate\Http\Request;
+use App\Daomnisettingsiteinfos;
+use Illuminate\Support\Facades\Schema;
 
 class DaomniProjectsController extends Controller
 {
@@ -24,8 +28,40 @@ class DaomniProjectsController extends Controller
     }
     public function landGrowth()
     {
-        $generalinfo['total_lands'] = Daomniorder::where('id', '>', 0)->orderBy('id', 'desc')->count('id');
 
+        $land_growth = [];
+        $rate = [];
+        $admin_id = $this->regURL(); //this is determined by url owner while 1 = super admin
+        $generalinfo['total_lands'] = Daomniorder::where('id', '>', 0)->orderBy('id', 'desc')->count('id');
+        $generalinfo['lands'] = Daomnilandtypes::where('admin_id', $admin_id)->get();
+
+        foreach ($generalinfo['lands'] as $lands) {
+            $rate = LandGrowthRate::where('land_id', (string)$lands["id"])->value('rate');
+            echo ($rate);
+            //$rate = $growth_rate["rate"];
+            $land_growth[$lands["id"]]["growth"] = ($lands["lands_price"] * 0.01) / 100;
+            $land_growth[$lands["id"]]["land_price"] = $lands["lands_price"];
+            $land_growth[$lands["id"]]["land_name"] = $lands["lands_name"];
+        }
+
+        foreach ($land_growth as $key => $value) {
+            $landGrowth = LandGrowth::firstOrCreate(
+                ["id" => $key],
+                ["growth_value" => $value["growth"], "land_price" => $value["land_price"], "land_name" => $value["land_name"]]
+            );
+            $landGrowth->growth_value += $value["growth"];
+            $landGrowth->save();
+        }
+    }
+
+    public function getLandGrowth()
+    {
+        $admin_id = $this->regURL(); //this is determined by url owner while 1 = super admin
+        $generalinfo['total_lands'] = Daomniorder::where('id', '>', 0)->orderBy('id', 'desc')->count('id');
+        $generalinfo['lands'] = Daomnilandtypes::where('admin_id', $admin_id)->get();
+
+        $newGrowth = LandGrowth::all();
+        dd($newGrowth);
         return view('admin/view_land_growth', $generalinfo);
     }
 

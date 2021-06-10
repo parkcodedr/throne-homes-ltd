@@ -15,7 +15,7 @@ class CreateLandGrowthRateTable extends Migration
     {
         Schema::create('land_growth_rate', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('land_id');
+            $table->integer('land_id');
             $table->float('rate')->default(0.01);
             $table->timestamps();
         });
