@@ -39,17 +39,25 @@ class DaomniProjectsController extends Controller
 
         foreach ($generalinfo['lands'] as $lands) {
             $rate = LandGrowthRate::where('land_id', (string)$lands["id"])->value('rate');
-            echo ($rate);
+
             //$rate = $growth_rate["rate"];
             $land_growth[$lands["id"]]["growth"] = ($lands["lands_price"] * 0.01) / 100;
             $land_growth[$lands["id"]]["land_price"] = $lands["lands_price"];
             $land_growth[$lands["id"]]["land_name"] = $lands["lands_name"];
+            $land_growth[$lands["id"]]["land_size"] = $lands["lands_size"];
+            $land_growth[$lands["id"]]["admin_id"] = $lands["admin_id"];
         }
 
         foreach ($land_growth as $key => $value) {
             $landGrowth = LandGrowth::firstOrCreate(
                 ["id" => $key],
-                ["growth_value" => $value["growth"], "land_price" => $value["land_price"], "land_name" => $value["land_name"]]
+                [
+                    "growth_value" => $value["growth"],
+                    "land_price" => $value["land_price"],
+                    "land_name" => $value["land_name"],
+                    "land_size" => $value["land_size"],
+                    "admin_id" => $value["admin_id"]
+                ]
             );
             $landGrowth->growth_value += $value["growth"];
             $landGrowth->save();
@@ -82,10 +90,58 @@ class DaomniProjectsController extends Controller
         $generalinfo['total_lands'] = Daomniorder::where('id', '>', 0)->orderBy('id', 'desc')->count('id');
         $generalinfo['lands'] = Daomnilandtypes::where('admin_id', $admin_id)->get();
 
-        $newLandGrowth = LandGrowth::all();
+        $newLandGrowth = LandGrowth::where('admin_id', $admin_id)->get();
 
         return view('admin/view_land_growth', [
             "newLandGrowth" => $newLandGrowth,
+            "generalinfo" => $generalinfo, "role" => $user_role, "user" => $user,
+            "totaladmins" => $generalinfo['totaladmins'], "totalstaffs" => $generalinfo["totalstaffs"],
+            "totalusers" => $generalinfo["totalusers"], "total_lands" => $generalinfo["total_lands"],
+            "total_lands_bought" => $generalinfo["total_lands_bought"],
+            "total_houses" => $generalinfo["total_houses"],
+            "total_houses_bought" => $generalinfo["total_houses_bought"],
+            "total_instalment" => $generalinfo["total_instalment"],
+            "totalrevenue" => $generalinfo["totalrevenue"],
+            "siteinfos" => $generalinfo["siteinfos"],
+            "title" => $generalinfo["title"]
+        ]);
+    }
+
+    public function landPrice()
+    {
+
+        $admin_id = $this->regURL(); //this is determined by url owner while 1 = super admin
+        $generalinfo['user'] = Auth::user();
+        $user = Auth::user();
+        $generalinfo['siteinfos'] = $this->getSiteinfosextract($admin_id);
+        $generalinfo['totaladmins'] = User::where('role_id', 2)->orderBy('id', 'desc')->count('id');
+
+        $generalinfo['totalusers'] = User::where('role_id', 3)->orderBy('id', 'desc')->count('id');
+        $generalinfo['totalstaffs'] = User::where('role_id', 'NOT LIKE', 1)->where('role_id', 'NOT LIKE', 3)->orderBy('id', 'desc')->count('id');
+        $generalinfo['totaladmins'] = User::where('role_id', 2)->orderBy('id', 'desc')->count('id');
+        $generalinfo['total_lands'] = Daomniorder::where('id', '>', 0)->orderBy('id', 'desc')->count('id');
+        $generalinfo['total_houses'] = Daomniorder::where('id', '>', 0)->orderBy('id', 'desc')->count('id');
+        $generalinfo['total_lands_bought'] = 0;
+        $generalinfo['total_houses_bought'] = 0;
+        $generalinfo['total_instalment'] = 0;
+        $generalinfo['totalrevenue'] = Daomniorder::where('id', '>', 0)->sum('price_pay');
+
+        $user_role = $getRole = Daomnirole::where('id', Auth::user()->role_id)->value("role");
+        $generalinfo['title'] = '::' . ucfirst(strtolower($user_role)) . ' home';
+
+        $generalinfo['role'] = $user_role;
+
+        $generalinfo['total_lands'] = Daomniorder::where('id', '>', 0)->orderBy('id', 'desc')->count('id');
+        $generalinfo['lands'] = Daomnilandtypes::where('admin_id', $admin_id)->get();
+
+
+        $land_defails = Daomnilandtypes::where('admin_id', $admin_id)
+            ->select('lands_price', 'lands_name', 'lands_size', 'created_at')->get();
+
+
+
+        return view('admin/land_price', [
+            "land_defails" => $land_defails,
             "generalinfo" => $generalinfo, "role" => $user_role, "user" => $user,
             "totaladmins" => $generalinfo['totaladmins'], "totalstaffs" => $generalinfo["totalstaffs"],
             "totalusers" => $generalinfo["totalusers"], "total_lands" => $generalinfo["total_lands"],

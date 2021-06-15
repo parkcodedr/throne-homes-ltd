@@ -24,7 +24,7 @@
             <div class="">
                 <div class="page-title">
                     <div class="title_left">
-                        <h3>Land Growth</h3>
+                        <h3>Land's Prices</h3>
                     </div>
 
                     <div class="title_right">
@@ -32,7 +32,7 @@
                             <nav aria-label="breadcrumb">
                                 <ol class="breadcrumb pull-right" style="background: none">
                                     <li class="breadcrumb-item"><a href="{{ url('/home') }}">Home</a></li>
-                                    <li class="breadcrumb-item active" aria-current="page">Land's Projects</li>
+                                    <li class="breadcrumb-item active" aria-current="page">Land's Prices</li>
                                 </ol>
                             </nav>
                         </div>
@@ -58,21 +58,19 @@
                                             <th>Lands</th>
                                             <th>Price</th>
                                             <th>Size</th>
-                                            <th>Current Value</th>
-                                            <th>Growth Value</th>
-                     
+                                           
+                                            <th>Date</th>
+                                        
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach ($newLandGrowth as $landGrowth)
+                                        @foreach ($land_defails as $land)
                                             <tr>
-                                                <td>{{ $landGrowth->land_name }}</td>
-                                                <td>{{ $landGrowth->land_price }}</td>
-                                                <td>{{ $landGrowth->land_size." sqm" }}</td>
-                                                <td>{{ $landGrowth->land_price + $landGrowth->growth_value}}</td>
-                                                <td>{{ $landGrowth->growth_value}}</td>
-                                                
-                                                
+                                                <td>{{ $land->lands_name }}</td>
+                                                <td>{{ $land->lands_price }}</td>
+                                                <td>{{ $land->lands_size." sqm" }}</td>
+                                                <td>{{ $land->created_at}}</td>
+                                  
                                             </tr>
                                         @endforeach
                                     </tbody>

@@ -17,7 +17,9 @@ class LandGrowthTable extends Migration
             $table->integer('id');
             $table->string('land_name');
             $table->integer('land_price');
+            $table->string('land_size');
             $table->float('growth_value');
+            $table->integer('admin_id');
             $table->primary('id');
             $table->timestamps();
         });

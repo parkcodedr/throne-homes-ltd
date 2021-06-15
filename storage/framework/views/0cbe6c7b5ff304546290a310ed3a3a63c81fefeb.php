@@ -4,35 +4,35 @@
             <div class="left_col scroll-view">
 
                 <!-- sidebar menu -->
-                @include('admin.backlayouts.sidebar_menu')
+                <?php echo $__env->make('admin.backlayouts.sidebar_menu', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
                 <!-- /sidebar menu -->
 
                 <!-- /menu footer buttons -->
-                @include('admin.backlayouts.menu_footer_buttons')
+                <?php echo $__env->make('admin.backlayouts.menu_footer_buttons', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
                 <!-- /menu footer buttons -->
             </div>
         </div>
 
         <!-- top navigation -->
-        @include('admin.backlayouts.top_navigation')
+        <?php echo $__env->make('admin.backlayouts.top_navigation', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
         <!-- /top navigation -->
 
         <!-- page content -->
         <div class="right_col" role="main">
             <!-- top tiles -->
-            @include('admin.backlayouts.top_tiles')
+            <?php echo $__env->make('admin.backlayouts.top_tiles', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
             <div class="">
                 <div class="page-title">
                     <div class="title_left">
-                        <h3>Land Growth</h3>
+                        <h3>Land's Prices</h3>
                     </div>
 
                     <div class="title_right">
                         <div class="col-md-5 col-sm-5   form-group pull-right top_search">
                             <nav aria-label="breadcrumb">
                                 <ol class="breadcrumb pull-right" style="background: none">
-                                    <li class="breadcrumb-item"><a href="{{ url('/home') }}">Home</a></li>
-                                    <li class="breadcrumb-item active" aria-current="page">Land's Projects</li>
+                                    <li class="breadcrumb-item"><a href="<?php echo e(url('/home')); ?>">Home</a></li>
+                                    <li class="breadcrumb-item active" aria-current="page">Land's Prices</li>
                                 </ol>
                             </nav>
                         </div>
@@ -58,23 +58,21 @@
                                             <th>Lands</th>
                                             <th>Price</th>
                                             <th>Size</th>
-                                            <th>Current Value</th>
-                                            <th>Growth Value</th>
-                     
+                                           
+                                            <th>Date</th>
+                                        
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach ($newLandGrowth as $landGrowth)
+                                        <?php $__currentLoopData = $land_defails; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $land): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                             <tr>
-                                                <td>{{ $landGrowth->land_name }}</td>
-                                                <td>{{ $landGrowth->land_price }}</td>
-                                                <td>{{ $landGrowth->land_size." sqm" }}</td>
-                                                <td>{{ $landGrowth->land_price + $landGrowth->growth_value}}</td>
-                                                <td>{{ $landGrowth->growth_value}}</td>
-                                                
-                                                
+                                                <td><?php echo e($land->lands_name); ?></td>
+                                                <td><?php echo e($land->lands_price); ?></td>
+                                                <td><?php echo e($land->lands_size." sqm"); ?></td>
+                                                <td><?php echo e($land->created_at); ?></td>
+                                  
                                             </tr>
-                                        @endforeach
+                                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                     </tbody>
                                 </table>
 
@@ -122,7 +120,8 @@
 <!-- /page content -->
 
 <!-- footer content -->
-@include('admin.backlayouts.menu_footer')
+<?php echo $__env->make('admin.backlayouts.menu_footer', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 <!-- /footer content -->
 </div>
 </div>
+<?php /**PATH C:\laravel\thronehomesltd\resources\views/admin/backlayouts/land_price.blade.php ENDPATH**/ ?>

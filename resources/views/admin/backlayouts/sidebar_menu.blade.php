@@ -23,8 +23,8 @@
                         </li>
                         <li class=""><a><i class="fa fa-bed"></i> Lands <span class="fa fa-chevron-down"></span></a>
                             <ul class="nav child_menu">
-                                <li><a href="#">Lands and Prices</a></li>
-                                <li><a href="/view_land_growth">Lands growth</a></li>
+                                <li><a href="{{ url('/land_price') }}">Lands and Prices</a></li>
+                                <li><a href="{{ url('/view_land_growth') }}">Lands growth</a></li>
                             </ul>
                         </li>
                         <li class=""><a><i class="fa fa-ticket"></i> Houses <span class="fa fa-chevron-down"></span></a>
@@ -62,8 +62,8 @@
                         </li>
                         <li class=""><a><i class="fa fa-bed"></i> Lands <span class="fa fa-chevron-down"></span></a>
                             <ul class="nav child_menu">
-                                <li><a href="#">Lands and Prices</a></li>
-                                <li><a href="/view_land_growth">Lands growth</a></li>
+                                <li><a href="{{ url('/land_price') }}">Lands and Prices</a></li>
+                                <li><a href="{{ url('/view_land_growth') }}">Lands growth</a></li>
                             </ul>
                         </li>
                         <li class=""><a><i class="fa fa-ticket"></i> Houses <span class="fa fa-chevron-down"></span></a>
@@ -92,6 +92,12 @@
                     @if ($role == 'user')
                         <li class=""><a href="{{ url('/home') }}"><i class="fa fa-home"></i> Dashboard -
                                 {{ $role }}</a></li>
+                                <li class=""><a><i class="fa fa-bed"></i> Lands <span class="fa fa-chevron-down"></span></a>
+                                    <ul class="nav child_menu">
+                                        <li><a href="{{ url('/land_price') }}">Lands and Prices</a></li>
+                                <li><a href="{{ url('/view_land_growth') }}">Lands growth</a></li>
+                                    </ul>
+                                </li>
                         <li class=""><a><i class="fa fa-book"></i> Subscriptions <span
                                     class="fa fa-chevron-down"></span></a>
                             <ul class="nav child_menu">
@@ -122,6 +128,12 @@
                     @if ($role == 'agent')
                         <li class=""><a href="{{ url('/home') }}"><i class="fa fa-home"></i> Dashboard -
                                 Influencer</a></li>
+                                <li class=""><a><i class="fa fa-bed"></i> Lands <span class="fa fa-chevron-down"></span></a>
+                                    <ul class="nav child_menu">
+                                        <li><a href="{{ url('/land_price') }}">Lands and Prices</a></li>
+                                        <li><a href="{{ url('/view_land_growth') }}">Lands growth</a></li>
+                                    </ul>
+                                </li>
                         <li class=""><a><i class="fa fa-book"></i> Subscriptions <span
                                     class="fa fa-chevron-down"></span></a>
                             <ul class="nav child_menu">
@@ -149,6 +161,7 @@
                     @if ($role == 'frontdesk')
                         <li class=""><a href="{{ url('/home') }}"><i class="fa fa-home"></i> Dashboard -
                                 {{ $role }}</a></li>
+                                
                         <li class=""><a><i class="fa fa-book"></i> Subscriptions <span
                                     class="fa fa-chevron-down"></span></a>
                             <ul class="nav child_menu">
@@ -158,8 +171,8 @@
                         </li>
                         <li class=""><a><i class="fa fa-bed"></i> Lands <span class="fa fa-chevron-down"></span></a>
                             <ul class="nav child_menu">
-                                <li><a href="#">Lands and Prices</a></li>
-                                <li><a href="/view_land_growth">Lands growth</a></li>
+                                <li><a href="{{ url('/land_price') }}">Lands and Prices</a></li>
+                                <li><a href="{{ url('/view_land_growth') }}">Lands growth</a></li>
                             </ul>
                         </li>
                         <li class=""><a><i class="fa fa-ticket"></i> Houses <span class="fa fa-chevron-down"></span></a>
@@ -172,12 +185,12 @@
                     @if ($role == 'architectural')
                         <li class=""><a href="{{ url('/home') }}"><i class="fa fa-home"></i> Dashboard -
                                 {{ $role }}</a></li>
-                        <li class=""><a><i class="fa fa-bed"></i> Lands <span class="fa fa-chevron-down"></span></a>
-                            <ul class="nav child_menu">
-                                <li><a href="/view_land">Lands and Prices</a></li>
-                                <li><a href="/view_land_growth">Lands growth</a></li>
-                            </ul>
-                        </li>
+                                <li class=""><a><i class="fa fa-bed"></i> Lands <span class="fa fa-chevron-down"></span></a>
+                                    <ul class="nav child_menu">
+                                        <li><a href="{{ url('/land_price') }}">Lands and Prices</a></li>
+                                        <li><a href="{{ url('/view_land_growth') }}">Lands growth</a></li>
+                                    </ul>
+                                </li>
                         <li class=""><a><i class="fa fa-ticket"></i> Houses <span class="fa fa-chevron-down"></span></a>
                             <ul class="nav child_menu">
                                 <li><a href="view_house">Houses & Prices</a></li>

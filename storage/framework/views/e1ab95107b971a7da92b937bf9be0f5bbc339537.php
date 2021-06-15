@@ -24,7 +24,7 @@
             <div class="">
                 <div class="page-title">
                     <div class="title_left">
-                        <h3>Land's Subscription</h3>
+                        <h3>Land Growth</h3>
                     </div>
 
                     <div class="title_right">
@@ -55,13 +55,12 @@
                                     style="width:100%">
                                     <thead>
                                         <tr>
-                                            <th>Title</th>
+                                            <th>Lands</th>
                                             <th>Price</th>
+                                            <th>Size</th>
                                             <th>Current Value</th>
                                             <th>Growth Value</th>
-                                            <th>Entry Date</th>
-                                            <th>Action</th>
-
+                     
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -69,10 +68,11 @@
                                             <tr>
                                                 <td><?php echo e($landGrowth->land_name); ?></td>
                                                 <td><?php echo e($landGrowth->land_price); ?></td>
+                                                <td><?php echo e($landGrowth->land_size." sqm"); ?></td>
                                                 <td><?php echo e($landGrowth->land_price + $landGrowth->growth_value); ?></td>
                                                 <td><?php echo e($landGrowth->growth_value); ?></td>
-                                                <td><?php echo e($landGrowth->updated_at); ?></td>
-                                                <td><a href="#">View/Edit</a></td>
+                                                
+                                                
                                             </tr>
                                         <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                     </tbody>
