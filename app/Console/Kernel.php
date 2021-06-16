@@ -33,7 +33,14 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
 
-        $schedule->call('App\Http\Controllers\DaomniProjectsController@landGrowth')->everyMinute();
+        $schedule->call('App\Http\Controllers\DaomniProjectsController@landGrowth')
+            ->daily()->when(function () {
+                $valid = false;
+                $valid_date = DB::table('growth_valid_date')->value('valid_date');
+                $today_date = date('Y-m-d');
+                $valid = $today_date <= $valid_date ? true : false;
+                return $valid;
+            });;
     }
 
     /**
