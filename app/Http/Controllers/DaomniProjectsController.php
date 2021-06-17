@@ -31,17 +31,7 @@ class DaomniProjectsController extends Controller
     {
         $land_growth = [];
         $rate = [];
-        
-        $valid_date = DB::table('growth_valid_date')->value('valid_date');
-        $today_date = date('Y-m-d');
-        
-        if ($today_date > $valid_date) {
-            
-        } else {
-        
-        }
 
-        
 
         $admin_id = $this->regURL(); //this is determined by url owner while 1 = super admin
         $generalinfo['siteinfos'] = $this->getSiteinfosextract($admin_id);

@@ -89,7 +89,8 @@ Route::get('/influencer_setting', 'DaomniInfluentialcouponsController@settings')
 Route::post('/update_code', 'DaomniInfluentialcouponsController@update_agentcode')->name('update_code');
 
 //user
-Route::get('/profile', 'DaomniProjectsController@show')->name('profile')->middleware('auth');
+Route::get('/profile', 'UserController@show')->name('profile')->middleware('auth');
+Route::post('/profile', 'UserController@update')->name('profile')->middleware('auth');
 
 Route::get('/view_land', 'DaomniProjectsController@projectLand')->name('lands')->middleware('auth');
 Route::get('/land_price', 'DaomniProjectsController@landPrice')->name('landprice')->middleware('auth');

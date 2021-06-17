@@ -10,7 +10,7 @@
                         <img src="{{ asset('backend/images/img.jpg') }}" alt="">{{ strtoupper($user->lastname) }} {{ ucfirst(strtolower($user->name)) }}
                     </a>
                     <div class="dropdown-menu dropdown-usermenu pull-right" aria-labelledby="navbarDropdown">
-                      <a class="dropdown-item"  href="javascript:;"> Profile</a>
+                      <a class="dropdown-item"  href="{{ asset('/profile') }}"> Profile</a>
                       <a class="dropdown-item"  href="javascript:;">
                           <span class="badge bg-red pull-right">50%</span>
                           <span>Settings</span>
