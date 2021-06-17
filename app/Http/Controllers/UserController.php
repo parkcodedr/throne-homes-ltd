@@ -9,6 +9,7 @@ use App\Daomnilandtypes;
 use Illuminate\Http\Request;
 use App\Daomnisettingsiteinfos;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Redirect;
 
 class UserController extends Controller
 {
@@ -65,14 +66,20 @@ class UserController extends Controller
         return view("admin.view_profile", $generalinfo);
     }
 
-    public function update(Request $request,User $user){
+    public function update(Request $request, User $user)
+    {
 
-      $mstatus = $request->mstatus;
-      $gender = $request->gender;
-      $city = $request->city;
-      $country = $request->country;
-      $user->update($gender,$mstatus,$city,$country);
-      return->back()->with('message','Updated successfully');
+        $mstatus = $request->mstatus;
+        $gender = $request->gender;
+        $city = $request->city;
+        $country = $request->country;
+
+        $updateUser = $user->update(["gender" => $gender, "mstatus" => $mstatus, "city" => $city, "country" => $country]);
+        if ($updateUser) {
+            return Redirect::back()->with('msg', 'Updated successfully,');
+        } else {
+            return Redirect::back()->with('msg', 'fail to update information');
+        }
     }
 
     public function regURL()

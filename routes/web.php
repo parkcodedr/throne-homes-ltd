@@ -90,7 +90,7 @@ Route::post('/update_code', 'DaomniInfluentialcouponsController@update_agentcode
 
 //user
 Route::get('/profile', 'UserController@show')->name('profile')->middleware('auth');
-Route::post('/profile', 'UserController@update')->name('profile')->middleware('auth');
+Route::put('/profile', 'UserController@update')->name('profile')->middleware('auth');
 
 Route::get('/view_land', 'DaomniProjectsController@projectLand')->name('lands')->middleware('auth');
 Route::get('/land_price', 'DaomniProjectsController@landPrice')->name('landprice')->middleware('auth');

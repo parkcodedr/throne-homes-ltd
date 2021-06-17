@@ -49,8 +49,9 @@
                                 <div class="clearfix"></div>
                             </div>
                             <div class="x_content">
-                                <form method="post" action="{{ route('confirmorder') }}" enctype="multipart/form-data" autocomplete="off">
+                                <form method="post" action="{{ route('profile') }}" enctype="multipart/form-data" autocomplete="off">
                                     @csrf
+                                    @method('PUT')
                                     <input type="text" id="discountmd5" value="{{ Request::get('buynow_type') }}" hidden>
                                     <input type="text" id="discount" value="0" hidden>
                                     <div class="row">
@@ -103,7 +104,7 @@
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label class="text-dark">Marital Status</label>
-                                                <select name="ms" type="text" class="form-control" required>
+                                                <select name="mstatus" type="text" class="form-control" required>
                                                     <option value="">Marital Status</option>
                                                     <option value="Single">Single</option>
                                                     <option value="Married">Married</option>
@@ -139,14 +140,14 @@
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label class="text-dark">Country</label>
-                                                <input class="form-control" name="city" type="text" placeholder="Country"  value="{{ $userInfo['country'] }}" >
+                                                <input class="form-control" name="country" type="text" placeholder="Country"  value="{{ $userInfo['country'] }}" >
                                             </div>
                                         </div>
                                         
 
                             </div>
                             <div class="col-md-4">
-                                <button class="btn btn-primary">Update</button>
+                                <button class="btn btn-primary" type="submit">Update</button>
                             </div>
                         </form>
                             </div>
