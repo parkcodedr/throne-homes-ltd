@@ -44,7 +44,36 @@
                     <div class="col-md-12 col-sm-12">
                         <div class="x_panel">
                             <div class="x_title">
-                                <!--                                <h2>Default Example <small>Users</small></h2>-->
+                    
+                                <form action="<?php echo e(route('upload')); ?>" method="POST" enctype="multipart/form-data">
+                                    <?php echo csrf_field(); ?>
+                                    <?php if ($errors->has('photo')) :
+if (isset($message)) { $messageCache = $message; }
+$message = $errors->first('photo'); ?>
+                                    <p class="text-center text-danger"><?php echo e($message); ?></p>
+                                    <?php unset($message);
+if (isset($messageCache)) { $message = $messageCache; }
+endif; ?>
+                                    <?php if(Session::has('success')): ?>
+                                    <p class="text-center text-success"><?php echo e(Session::get('success')); ?></p>
+                                    <?php endif; ?>
+                                    <?php if(Session::has('error')): ?>
+                                    <p class="text-center text-danger"><?php echo e(Session::get('error')); ?></p>
+                                    <?php endif; ?>
+                                <div class="row">
+                                   
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="text-dark">Update Profile Photo</label>
+                                        <input class="form-control" name="file" type="file">
+                                        
+                                    </div>
+                                </div>
+                                <div class="col-md-4" style="margin-top: 26px">
+                                    <button class="btn btn-primary" type="submit">Upload</button>
+                                </div>
+                            </div>
+                        </form>
 
                                 <div class="clearfix"></div>
                             </div>
@@ -93,8 +122,8 @@
                                                 <label class="text-dark">Gender</label>
                                                 <select name="gender" type="text" class="form-control" >
                                                     <option value="">Select Gender</option>
-                                                    <option value="Male">Male</option>
-                                                    <option value="Female">Female</option>
+                                                    <option value="Male" <?php echo e($user->gender =='Male'? 'selected':''); ?>>Male</option>
+                                                    <option value="Female" <?php echo e($user->gender =='Female'? 'selected':''); ?>>Female</option>
                                                 </select>
                                             </div>
                                         </div>
@@ -106,9 +135,9 @@
                                                 <label class="text-dark">Marital Status</label>
                                                 <select name="mstatus" type="text" class="form-control" required>
                                                     <option value="">Marital Status</option>
-                                                    <option value="Single">Single</option>
-                                                    <option value="Married">Married</option>
-                                                    <option value="Divorced">Divorced</option>
+                                                    <option value="Single" <?php echo e($user->mstatus =='Single'? 'selected':''); ?>>Single</option>
+                                                    <option value="Married" <?php echo e($user->mstatus =='Married'? 'selected':''); ?>>Married</option>
+                                                    <option value="Divorced" <?php echo e($user->mstatus =='Divorced'? 'selected':''); ?>>Divorced</option>
                                                 </select>
                                             </div>
                                         </div>

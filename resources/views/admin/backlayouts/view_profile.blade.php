@@ -44,7 +44,32 @@
                     <div class="col-md-12 col-sm-12">
                         <div class="x_panel">
                             <div class="x_title">
-                                <!--                                <h2>Default Example <small>Users</small></h2>-->
+                    
+                                <form action="{{ route('upload') }}" method="POST" enctype="multipart/form-data">
+                                    @csrf
+                                    @error('photo')
+                                    <p class="text-center text-danger">{{$message}}</p>
+                                    @enderror
+                                    @if(Session::has('success'))
+                                    <p class="text-center text-success">{{Session::get('success')}}</p>
+                                    @endif
+                                    @if(Session::has('error'))
+                                    <p class="text-center text-danger">{{Session::get('error')}}</p>
+                                    @endif
+                                <div class="row">
+                                   
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="text-dark">Update Profile Photo</label>
+                                        <input class="form-control" name="file" type="file">
+                                        
+                                    </div>
+                                </div>
+                                <div class="col-md-4" style="margin-top: 26px">
+                                    <button class="btn btn-primary" type="submit">Upload</button>
+                                </div>
+                            </div>
+                        </form>
 
                                 <div class="clearfix"></div>
                             </div>
@@ -93,8 +118,8 @@
                                                 <label class="text-dark">Gender</label>
                                                 <select name="gender" type="text" class="form-control" >
                                                     <option value="">Select Gender</option>
-                                                    <option value="Male">Male</option>
-                                                    <option value="Female">Female</option>
+                                                    <option value="Male" {{ $user->gender =='Male'? 'selected':'' }}>Male</option>
+                                                    <option value="Female" {{ $user->gender =='Female'? 'selected':'' }}>Female</option>
                                                 </select>
                                             </div>
                                         </div>
@@ -106,9 +131,9 @@
                                                 <label class="text-dark">Marital Status</label>
                                                 <select name="mstatus" type="text" class="form-control" required>
                                                     <option value="">Marital Status</option>
-                                                    <option value="Single">Single</option>
-                                                    <option value="Married">Married</option>
-                                                    <option value="Divorced">Divorced</option>
+                                                    <option value="Single" {{ $user->mstatus =='Single'? 'selected':'' }}>Single</option>
+                                                    <option value="Married" {{ $user->mstatus =='Married'? 'selected':'' }}>Married</option>
+                                                    <option value="Divorced" {{ $user->mstatus =='Divorced'? 'selected':'' }}>Divorced</option>
                                                 </select>
                                             </div>
                                         </div>

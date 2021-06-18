@@ -66,19 +66,39 @@ class UserController extends Controller
         return view("admin.view_profile", $generalinfo);
     }
 
-    public function update(Request $request, User $user)
+    public function update(Request $request)
     {
-
+        $id = auth()->user()->id;
         $mstatus = $request->mstatus;
         $gender = $request->gender;
         $city = $request->city;
         $country = $request->country;
 
-        $updateUser = $user->update(["gender" => $gender, "mstatus" => $mstatus, "city" => $city, "country" => $country]);
+        $updateUser = User::where('id', $id)->update(["gender" => $gender, "mstatus" => $mstatus, "city" => $city, "country" => $country]);
         if ($updateUser) {
             return Redirect::back()->with('msg', 'Updated successfully,');
         } else {
             return Redirect::back()->with('msg', 'fail to update information');
+        }
+    }
+
+    public function uploadPhoto(Request $request)
+    {
+        $request->validate([
+            'file' => 'required|mimes:jpeg,png,jpg|max:2048',
+        ]);
+
+        $fileName = time() . rand(0000, 99999) . '.' . $request->file->extension();
+        $request->file->move(public_path('uploads'), $fileName);
+
+        $id = auth()->user()->id;
+        $profile = User::where('id', $id)->update(array('photo' => $fileName));
+        if ($profile) {
+            return Redirect::to('/profile')
+                ->with('success', 'You have successfully updated your Photo');
+        } else {
+            return Redirect::to('/profile')
+                ->with('error', 'unable to update your Photo.');
         }
     }
 
