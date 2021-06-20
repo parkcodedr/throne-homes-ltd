@@ -77,15 +77,20 @@
                                 <form method="post" action="{{ route('profile') }}" enctype="multipart/form-data" autocomplete="off">
                                     @csrf
                                     @method('PUT')
-                                    <input type="text" id="discountmd5" value="{{ Request::get('buynow_type') }}" hidden>
-                                    <input type="text" id="discount" value="0" hidden>
+                                    
+                                    @if(Session::has('msg'))
+                                    <p class="text-center text-success">{{Session::get('msg')}}</p>
+                                    @endif
+                                    @if(Session::has('error_msg'))
+                                    <p class="text-center text-danger">{{Session::get('error_msg')}}</p>
+                                    @endif
                                     <div class="row">
                                         <div class="col-md-12">
                                             <h4><b>PERSONAL INFORMATION</b></h4>
                                         </div>
                                         <br>
                                         <br>
-                                       
+                                        
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label class="text-dark">Name</label>

@@ -81,15 +81,20 @@ endif; ?>
                                 <form method="post" action="<?php echo e(route('profile')); ?>" enctype="multipart/form-data" autocomplete="off">
                                     <?php echo csrf_field(); ?>
                                     <?php echo method_field('PUT'); ?>
-                                    <input type="text" id="discountmd5" value="<?php echo e(Request::get('buynow_type')); ?>" hidden>
-                                    <input type="text" id="discount" value="0" hidden>
+                                    
+                                    <?php if(Session::has('msg')): ?>
+                                    <p class="text-center text-success"><?php echo e(Session::get('msg')); ?></p>
+                                    <?php endif; ?>
+                                    <?php if(Session::has('error_msg')): ?>
+                                    <p class="text-center text-danger"><?php echo e(Session::get('error_msg')); ?></p>
+                                    <?php endif; ?>
                                     <div class="row">
                                         <div class="col-md-12">
                                             <h4><b>PERSONAL INFORMATION</b></h4>
                                         </div>
                                         <br>
                                         <br>
-                                       
+                                        
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label class="text-dark">Name</label>

@@ -34,6 +34,10 @@
                         </li>
                         <li class=""><a><i class="fa fa-suitcase"></i> Management <span
                                     class="fa fa-chevron-down"></span></a>
+                                    <ul class="nav child_menu">
+                                    <li><a href="{{ url('/update_request_list') }}">View Update Request</a></li>
+                                   
+                                </ul>
                             <ul class="nav child_menu">
                                 <li><a href="#">Add New Land</a></li>
                                 <li><a href="#">Add New House</a></li>
@@ -73,6 +77,11 @@
                         </li>
                         <li class=""><a><i class="fa fa-suitcase"></i> Management <span
                                     class="fa fa-chevron-down"></span></a>
+                                    <ul class="nav child_menu">
+                                    <li><a href="{{ url('/update_request_list') }}">View Update Request</a></li>
+                                   
+                                </ul>
+                                   
                             <ul class="nav child_menu">
                                 <li><a href="#">Add New Land</a></li>
                                 <li><a href="#">Add New House</a></li>
@@ -98,6 +107,10 @@
                                 <li><a href="{{ url('/view_land_growth') }}">Lands growth</a></li>
                                     </ul>
                                 </li>
+                                <ul class="nav child_menu">
+                                    <li><a href="{{ url('/request_name_update') }}">Request name update</a></li>
+                                   
+                                </ul>
                         <li class=""><a><i class="fa fa-book"></i> Subscriptions <span
                                     class="fa fa-chevron-down"></span></a>
                             <ul class="nav child_menu">
@@ -134,6 +147,7 @@
                                         <li><a href="{{ url('/view_land_growth') }}">Lands growth</a></li>
                                     </ul>
                                 </li>
+                               
                         <li class=""><a><i class="fa fa-book"></i> Subscriptions <span
                                     class="fa fa-chevron-down"></span></a>
                             <ul class="nav child_menu">
@@ -152,6 +166,10 @@
                         </li>
                         <li class=""><a><i class="fa fa-suitcase"></i> Management <span
                                     class="fa fa-chevron-down"></span></a>
+                                    <ul class="nav child_menu">
+                                        <li><a href="{{ url('/request_name_update') }}">Request name update</a></li>
+                                       
+                                    </ul>
                             <ul class="nav child_menu">
                                 <li><a href="/influencer_setting">Add / Modify Code</a></li>
                             </ul>
@@ -169,6 +187,10 @@
                                 <li><a href="#">Houses' Subscriptions</a></li>
                             </ul>
                         </li>
+                        <ul class="nav child_menu">
+                            <li><a href="{{ url('/request_name_update') }}">Request name update</a></li>
+                           
+                        </ul>
                         <li class=""><a><i class="fa fa-bed"></i> Lands <span class="fa fa-chevron-down"></span></a>
                             <ul class="nav child_menu">
                                 <li><a href="{{ url('/land_price') }}">Lands and Prices</a></li>
@@ -198,6 +220,10 @@
                         </li>
                         <li class=""><a><i class="fa fa-suitcase"></i> Management <span
                                     class="fa fa-chevron-down"></span></a>
+                                    <ul class="nav child_menu">
+                                        <li><a href="{{ url('/request_name_update') }}">Request name update</a></li>
+                                       
+                                    </ul>
                             <ul class="nav child_menu">
                                 <li><a href="add_land">Add New Land</a></li>
                                 <li><a href="add_house">Add New House</a></li>

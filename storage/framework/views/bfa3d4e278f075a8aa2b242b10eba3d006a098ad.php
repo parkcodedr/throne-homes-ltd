@@ -7,7 +7,7 @@
             <ul class=" navbar-right">
                 <li class="nav-item dropdown open" style="padding-left: 15px;">
                     <a href="javascript:;" class="user-profile dropdown-toggle" aria-haspopup="true" id="navbarDropdown" data-toggle="dropdown" aria-expanded="false">
-                        <img src="<?php echo e(asset('backend/images/img.jpg')); ?>" alt=""><?php echo e(strtoupper($user->lastname)); ?> <?php echo e(ucfirst(strtolower($user->name))); ?>
+                        <img src="<?php echo e(asset('uploads/profile_image/'.$user->photo)); ?>" alt=""><?php echo e(strtoupper($user->lastname)); ?> <?php echo e(ucfirst(strtolower($user->name))); ?>
 
                     </a>
                     <div class="dropdown-menu dropdown-usermenu pull-right" aria-labelledby="navbarDropdown">

@@ -92,7 +92,13 @@ Route::post('/update_code', 'DaomniInfluentialcouponsController@update_agentcode
 Route::get('/profile', 'UserController@show')->name('profile')->middleware('auth');
 Route::put('/profile', 'UserController@update')->name('profile')->middleware('auth');
 Route::post('/upload', 'UserController@uploadPhoto')->name('upload')->middleware('auth');
+Route::get('/request_name_update', 'UserController@nameUpdateForm')->name('request_name_update')->middleware('auth');
+Route::post('/request_name_update', 'UserController@storeNameUpdateRequest')->name('request_name_update')->middleware('auth');
 
+//admin
+Route::get('/update_request_list', 'UserController@updateRequestList')->name('update_request_list')->middleware('auth');
+Route::get('/update_request_list/{user_id}', 'UserController@updateRequestSingle')->name('update_request_list')->middleware('auth');
+Route::put('/update_request_list/{id}', 'UserController@approveUpdateRequest')->name('update_request_list')->middleware('auth');
 
 Route::get('/view_land', 'DaomniProjectsController@projectLand')->name('lands')->middleware('auth');
 Route::get('/land_price', 'DaomniProjectsController@landPrice')->name('landprice')->middleware('auth');
