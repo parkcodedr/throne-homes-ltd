@@ -20,7 +20,7 @@
         <!-- page content -->
         <div class="right_col" role="main">
             <!-- top tiles -->
-            @include('admin.backlayouts.top_tiles')
+           
             <div class="">
                 <div class="page-title">
                     <div class="title_left">

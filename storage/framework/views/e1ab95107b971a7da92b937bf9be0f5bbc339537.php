@@ -20,7 +20,7 @@
         <!-- page content -->
         <div class="right_col" role="main">
             <!-- top tiles -->
-            <?php echo $__env->make('admin.backlayouts.top_tiles', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+           
             <div class="">
                 <div class="page-title">
                     <div class="title_left">
