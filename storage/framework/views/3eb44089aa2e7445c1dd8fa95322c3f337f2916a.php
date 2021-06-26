@@ -122,9 +122,9 @@
                                     class="fa fa-chevron-down"></span></a>
                             <ul class="nav child_menu">
                                 <li><a href="<?php echo e(url('/my_lands/lugbe')); ?>">Lugbe Details</a></li>
-                                <li><a href="<?php echo e(url('/request_name_update/apo')); ?>">IDU Details</a></li>
-                                <li><a href="#">APO Details</a></li>
-                                <li><a href="#">ACO Details</a></li>
+                                <li><a href="<?php echo e(url('/my_lands/idu')); ?>">IDU Details</a></li>
+                                <li><a href="<?php echo e(url('/my_lands/apo')); ?>">APO Details</a></li>
+                                <li><a href="<?php echo e(url('/my_lands/aco')); ?>">ACO Details</a></li>
                             </ul>
                         </li>
                         <li class=""><a><i class="fa fa-book"></i> My House(s) <span
