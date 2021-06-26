@@ -121,8 +121,8 @@
                         <li class=""><a><i class="fa fa-book"></i> My Land(s) <span
                                     class="fa fa-chevron-down"></span></a>
                             <ul class="nav child_menu">
-                                <li><a href="#">Lugbe Details</a></li>
-                                <li><a href="#">IDU Details</a></li>
+                                <li><a href="<?php echo e(url('/my_lands/lugbe')); ?>">Lugbe Details</a></li>
+                                <li><a href="<?php echo e(url('/request_name_update/apo')); ?>">IDU Details</a></li>
                                 <li><a href="#">APO Details</a></li>
                                 <li><a href="#">ACO Details</a></li>
                             </ul>

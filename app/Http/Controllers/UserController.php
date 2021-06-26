@@ -319,6 +319,16 @@ class UserController extends Controller
         
     }
 
+    public function myLands(Request $request,$name){
+        $user = auth()->user();
+        $userLand = Daomniorder::where('user_id',$user->id)->get();
+        foreach ($userLand as $landOrder) {
+        $land = Daomnilandtypes::where('id',$landOrder["daomnilandtypes_id"])
+        ->where('lands_name','like','%'.$name.'%')->first();
+        dd($land);
+        }
+    }
+
     public function regURL()
     {
         $user_logon = 'Login';
