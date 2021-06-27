@@ -64,11 +64,12 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                    <?php if($userLands[0]->land_name==null): ?>
-                                        <tr>
-                                        <td colspan="5" class="text-center">No Record found</td>
-                                        </tr>
+                                    <?php if(count($userLands)==0): ?>
+                                    <tr>
+                                    <td colspan="5" class="text-center">No record found</td>
+                                    </tr>
                                     <?php else: ?>
+                                   
                                         <?php $__currentLoopData = $userLands; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $land): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                             <tr>
                                                 <td><?php echo e($land->land_name); ?></td>
@@ -81,6 +82,7 @@
                                             
                                         <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                         <?php endif; ?>
+                                       
                                     </tbody>
                                 </table>
 

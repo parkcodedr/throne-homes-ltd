@@ -323,16 +323,17 @@ class UserController extends Controller
         
         $user = auth()->user();
         $userLand = Daomniorder::select('id','user_id','order_price','payment_plan','daomnilandtypes_id','status','created_at')->where('user_id',$user->id)->get();
-        
+      
         foreach ($userLand as $landOrder) {
         $land = Daomnilandtypes::select('lands_name','lands_size')
-        ->whereRaw("id=".$landOrder['daomnilandtypes_id']." AND lands_name like '%".$name."%'")
+        ->where("id",$landOrder['daomnilandtypes_id'])
         ->first();
         
         $landOrder->land_name = $land["lands_name"];
         $landOrder->land_size = $land["lands_size"];
         }
-
+        
+        
         $admin_id = $this->regURL(); //this is determined by url owner while 1 = super admin
         $generalinfo['user'] = Auth::user();
         $generalinfo['siteinfos'] = $this->getSiteinfosextract($admin_id);
@@ -354,6 +355,18 @@ class UserController extends Controller
         $generalinfo['role'] = $user_role;
         $generalinfo['total_lands'] = Daomniorder::where('id', '>', 0)->orderBy('id', 'desc')->count('id');
         $generalinfo['lands'] = Daomnilandtypes::where('admin_id', $admin_id)->get();
+        
+        foreach ($userLand as $key => $value) {
+            if($value->land_name==null){
+                unset($userLand[$key]);
+            }
+            if(strpos(strtolower($value->land_name),$name)!==false){
+               
+            }else{
+                unset($userLand[$key]);
+            }
+        }
+        
 
         return view('admin/my_lands', [
             "userLands" => $userLand,

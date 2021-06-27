@@ -95,7 +95,7 @@ Route::post('/upload', 'UserController@uploadPhoto')->name('upload')->middleware
 Route::get('/request_name_update', 'UserController@nameUpdateForm')->name('request_name_update')->middleware('auth');
 Route::post('/request_name_update', 'UserController@storeNameUpdateRequest')->name('request_name_update')->middleware('auth');
 Route::get('/my_lands/{name}', 'UserController@myLands')->name('my_lands')->middleware('auth');
-
+Route::get('/my_house/{name}', 'UserController@myLands')->name('my_house')->middleware('auth');
 //admin
 Route::get('/update_request_list', 'UserController@updateRequestList')->name('update_request_list')->middleware('auth');
 Route::get('/update_request_list/{user_id}', 'UserController@updateRequestSingle')->name('update_request_list')->middleware('auth');
