@@ -64,7 +64,6 @@ class UserController extends Controller
             "siteinfos" => $generalinfo["siteinfos"],
             "title" => $generalinfo["title"]
         ]);
-      
     }
 
     public function update(Request $request)
@@ -90,13 +89,13 @@ class UserController extends Controller
             'file' => 'required|mimes:jpeg,png,jpg|max:2048',
         ]);
 
-        
+
         $fileName = time() . rand(0000, 99999) . '.' . $request->file->extension();
         $id = auth()->user()->id;
         $profile = User::where('id', $id)->update(array('photo' => $fileName));
 
         if ($profile) {
-        $request->file->move(public_path('uploads/profile_image'), $fileName);
+            $request->file->move(public_path('uploads/profile_image'), $fileName);
             return Redirect::to('/profile')
                 ->with('success', 'You have successfully updated your Photo');
         } else {
@@ -149,44 +148,45 @@ class UserController extends Controller
             "title" => $generalinfo["title"]
         ]);
     }
-    public function storeNameUpdateRequest(Request $request){
+    public function storeNameUpdateRequest(Request $request)
+    {
         $request->validate([
-            'name'=>'required',
-            'lastname'=>'required',
-            'phone'=>'required',
-            'email'=>'required|email',
-            'dob'=>'required|date',
-            'document_type'=>'required',
+            'name' => 'required',
+            'lastname' => 'required',
+            'phone' => 'required',
+            'email' => 'required|email',
+            'dob' => 'required|date',
+            'document_type' => 'required',
             'file' => 'required|mimes:jpeg,png,jpg|max:2048',
         ]);
         $fileName = time() . rand(0000, 99999) . '.' . $request->file->extension();
-        
+
         $user_id = auth()->user()->id;
 
-       $user = RequestNameUpdate::create([
-            'name'=>$request->name,
-            'lastname'=>$request->lastname,
-            'middlename'=>$request->middlename,
-            'email'=>$request->email,
-            'phone'=>$request->phone,
-            'dob'=>$request->dob,
-            'document_type'=>$request->document_type,
-            'document_name'=>$fileName,
-            'user_id'=>$user_id
-       ]);
+        $user = RequestNameUpdate::create([
+            'name' => $request->name,
+            'lastname' => $request->lastname,
+            'middlename' => $request->middlename,
+            'email' => $request->email,
+            'phone' => $request->phone,
+            'dob' => $request->dob,
+            'document_type' => $request->document_type,
+            'document_name' => $fileName,
+            'user_id' => $user_id
+        ]);
 
-        if($user){
+        if ($user) {
             $request->file->move(public_path('uploads/documents'), $fileName);
-            return redirect()->back()->with("success","Update request submitted successfully");
-        }else{
-            return redirect()->back()->with("error","unable to submit Update request");
+            return redirect()->back()->with("success", "Update request submitted successfully");
+        } else {
+            return redirect()->back()->with("error", "unable to submit Update request");
         }
-
     }
 
-    public function updateRequestList(){
+    public function updateRequestList()
+    {
         $updateRequestList = RequestNameUpdate::all();
-        
+
         $user = auth()->user();
         $user->password = null;
         $admin_id = $this->regURL(); //this is determined by url owner while 1 = super admin
@@ -218,7 +218,7 @@ class UserController extends Controller
 
         return view('admin/update_request_list', [
             "userInfo" => $userInfo,
-            "updateRequestList"=>$updateRequestList,
+            "updateRequestList" => $updateRequestList,
             "generalinfo" => $generalinfo, "role" => $user_role, "user" => $user,
             "totaladmins" => $generalinfo['totaladmins'], "totalstaffs" => $generalinfo["totalstaffs"],
             "totalusers" => $generalinfo["totalusers"], "total_lands" => $generalinfo["total_lands"],
@@ -232,13 +232,14 @@ class UserController extends Controller
         ]);
     }
 
-    public function updateRequestSingle(Request $request,$id){
+    public function updateRequestSingle(Request $request, $id)
+    {
         //$updateRequestList = RequestNameUpdate::all();
-        
-        
-        $requestUser = RequestNameUpdate::where('user_id',$id)->first();
-    
-        
+
+
+        $requestUser = RequestNameUpdate::where('user_id', $id)->first();
+
+
         $admin_id = $this->regURL(); //this is determined by url owner while 1 = super admin
         $generalinfo['user'] = Auth::user();
         $user = Auth::user();
@@ -263,7 +264,7 @@ class UserController extends Controller
         $generalinfo['total_lands'] = Daomniorder::where('id', '>', 0)->orderBy('id', 'desc')->count('id');
         $generalinfo['lands'] = Daomnilandtypes::where('admin_id', $admin_id)->get();
 
-    
+
 
         return view('admin/update_request_single', [
             "userInfo" => $requestUser,
@@ -280,60 +281,61 @@ class UserController extends Controller
         ]);
     }
 
-    public function approveUpdateRequest(Request $request,$id)
+    public function approveUpdateRequest(Request $request, $id)
     {
         $request->validate([
-            'name'=>'required',
-            'lastname'=>'required',
-            'phone'=>'required',
-            'email'=>'required|email',
-            'dob'=>'required|date',
-            
+            'name' => 'required',
+            'lastname' => 'required',
+            'phone' => 'required',
+            'email' => 'required|email',
+            'dob' => 'required|date',
+
         ]);
-          
+
         $admin_id = auth()->user()->id;
         $user_role = $getRole = Daomnirole::where('id', Auth::user()->role_id)->value("role");
-    
-        if($user_role==="admin" || $user_role==="super"){
-            
-        $name = $request->name;
-        $lastname = $request->lastname;
-        $middlename = $request->middlename;
-        $email = $request->email;
-        $phone = $request->phone;
-        $dob = $request->dob;
 
-        $updateUser = User::where('id', $id)->update(["name" => $name, "middlename" => $middlename, 
-        "lastname" => $lastname, "email" => $email, 'phone' => $phone,
-        'dob' => $dob]);
-        if ($updateUser) {
-            RequestNameUpdate::where('user_id', $id)->update(['approved_admin_id' => $admin_id,'approval_status' => 'Approved']);
-            return Redirect::back()->with('success', 'Approved successfully,');
+        if ($user_role === "admin" || $user_role === "super") {
+
+            $name = $request->name;
+            $lastname = $request->lastname;
+            $middlename = $request->middlename;
+            $email = $request->email;
+            $phone = $request->phone;
+            $dob = $request->dob;
+
+            $updateUser = User::where('id', $id)->update([
+                "name" => $name, "middlename" => $middlename,
+                "lastname" => $lastname, "email" => $email, 'phone' => $phone,
+                'dob' => $dob
+            ]);
+            if ($updateUser) {
+                RequestNameUpdate::where('user_id', $id)->update(['approved_admin_id' => $admin_id, 'approval_status' => 'Approved']);
+                return Redirect::back()->with('success', 'Approved successfully,');
+            } else {
+                return Redirect::back()->with('error', 'fail to approve update request');
+            }
         } else {
-            return Redirect::back()->with('error', 'fail to approve update request');
-        }
-            
-        }else{
             return Redirect::back()->with('error', 'Access Denied');
         }
-        
     }
 
-    public function myLands(Request $request,$name){
-        
+    public function myLands(Request $request, $name)
+    {
+
         $user = auth()->user();
-        $userLand = Daomniorder::select('id','user_id','order_price','payment_plan','daomnilandtypes_id','status','created_at')->where('user_id',$user->id)->get();
-      
+        $userLand = Daomniorder::select('id', 'user_id', 'order_price', 'payment_plan', 'daomnilandtypes_id', 'status', 'created_at')->where(['user_id' => $user->id, "group" => "Lands", "status" => "confirmed"])->get();
+
         foreach ($userLand as $landOrder) {
-        $land = Daomnilandtypes::select('lands_name','lands_size')
-        ->where("id",$landOrder['daomnilandtypes_id'])
-        ->first();
-        
-        $landOrder->land_name = $land["lands_name"];
-        $landOrder->land_size = $land["lands_size"];
+            $land = Daomnilandtypes::select('lands_name', 'lands_size')
+                ->where("id", $landOrder['daomnilandtypes_id'],)
+                ->first();
+
+            $landOrder->land_name = $land["lands_name"];
+            $landOrder->land_size = $land["lands_size"];
         }
-        
-        
+
+
         $admin_id = $this->regURL(); //this is determined by url owner while 1 = super admin
         $generalinfo['user'] = Auth::user();
         $generalinfo['siteinfos'] = $this->getSiteinfosextract($admin_id);
@@ -355,20 +357,85 @@ class UserController extends Controller
         $generalinfo['role'] = $user_role;
         $generalinfo['total_lands'] = Daomniorder::where('id', '>', 0)->orderBy('id', 'desc')->count('id');
         $generalinfo['lands'] = Daomnilandtypes::where('admin_id', $admin_id)->get();
-        
+
         foreach ($userLand as $key => $value) {
-            if($value->land_name==null){
+            if ($value->land_name == null) {
                 unset($userLand[$key]);
             }
-            if(strpos(strtolower($value->land_name),$name)!==false){
-               
-            }else{
+            if (strpos(strtolower($value->land_name), $name) !== false) {
+            } else {
                 unset($userLand[$key]);
             }
         }
-        
+
 
         return view('admin/my_lands', [
+            "name" => $name,
+            "userLands" => $userLand,
+            "generalinfo" => $generalinfo, "role" => $user_role, "user" => $user,
+            "totaladmins" => $generalinfo['totaladmins'], "totalstaffs" => $generalinfo["totalstaffs"],
+            "totalusers" => $generalinfo["totalusers"], "total_lands" => $generalinfo["total_lands"],
+            "total_lands_bought" => $generalinfo["total_lands_bought"],
+            "total_houses" => $generalinfo["total_houses"],
+            "total_houses_bought" => $generalinfo["total_houses_bought"],
+            "total_instalment" => $generalinfo["total_instalment"],
+            "totalrevenue" => $generalinfo["totalrevenue"],
+            "siteinfos" => $generalinfo["siteinfos"],
+            "title" => $generalinfo["title"]
+        ]);
+    }
+
+    public function myHouse(Request $request, $name)
+    {
+
+        $user = auth()->user();
+        $userLand = Daomniorder::select('id', 'user_id', 'order_price', 'payment_plan', 'daomnilandtypes_id', 'status', 'created_at')->where(['user_id' => $user->id, "group" => "Houses", "status" => "confirmed"])->get();
+
+        foreach ($userLand as $landOrder) {
+            $land = Daomnilandtypes::select('lands_name', 'lands_size')
+                ->where("id", $landOrder['daomnilandtypes_id'],)
+                ->first();
+
+            $landOrder->land_name = $land["lands_name"];
+            $landOrder->land_size = $land["lands_size"];
+        }
+
+
+        $admin_id = $this->regURL(); //this is determined by url owner while 1 = super admin
+        $generalinfo['user'] = Auth::user();
+        $generalinfo['siteinfos'] = $this->getSiteinfosextract($admin_id);
+        $generalinfo['totaladmins'] = User::where('role_id', 2)->orderBy('id', 'desc')->count('id');
+
+        $generalinfo['totalusers'] = User::where('role_id', 3)->orderBy('id', 'desc')->count('id');
+        $generalinfo['totalstaffs'] = User::where('role_id', 'NOT LIKE', 1)->where('role_id', 'NOT LIKE', 3)->orderBy('id', 'desc')->count('id');
+        $generalinfo['totaladmins'] = User::where('role_id', 2)->orderBy('id', 'desc')->count('id');
+        $generalinfo['total_lands'] = Daomniorder::where('id', '>', 0)->orderBy('id', 'desc')->count('id');
+        $generalinfo['total_houses'] = Daomniorder::where('id', '>', 0)->orderBy('id', 'desc')->count('id');
+        $generalinfo['total_lands_bought'] = 0;
+        $generalinfo['total_houses_bought'] = 0;
+        $generalinfo['total_instalment'] = 0;
+        $generalinfo['totalrevenue'] = Daomniorder::where('id', '>', 0)->sum('price_pay');
+
+        $user_role = $getRole = Daomnirole::where('id', Auth::user()->role_id)->value("role");
+        $generalinfo['title'] = '::' . ucfirst(strtolower($user_role)) . ' home';
+
+        $generalinfo['role'] = $user_role;
+        $generalinfo['total_lands'] = Daomniorder::where('id', '>', 0)->orderBy('id', 'desc')->count('id');
+        $generalinfo['lands'] = Daomnilandtypes::where('admin_id', $admin_id)->get();
+
+        foreach ($userLand as $key => $value) {
+            if ($value->land_name == null) {
+                unset($userLand[$key]);
+            }
+            if (strpos(strtolower($value->land_name), $name) !== false) {
+            } else {
+                unset($userLand[$key]);
+            }
+        }
+
+
+        return view('admin/my_house', [
+            "name" => $name,
             "userLands" => $userLand,
             "generalinfo" => $generalinfo, "role" => $user_role, "user" => $user,
             "totaladmins" => $generalinfo['totaladmins'], "totalstaffs" => $generalinfo["totalstaffs"],

@@ -378,7 +378,6 @@ class OuterController extends Controller
         $details = $orderdetails;
         $helperClass = new HelperClass();
         $sendMail = $helperClass->sendEmail($emailAddress, $subject, $details, 1);
-
         $subject = "Registration Details";
         $helperClass = new HelperClass();
         $sendMail = $helperClass->sendEmail($emailAddress, $subject, $details,2);

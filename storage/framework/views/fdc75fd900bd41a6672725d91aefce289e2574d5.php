@@ -66,7 +66,7 @@
                                     <tbody>
                                     <?php if(count($userLands)==0): ?>
                                     <tr>
-                                    <td colspan="5" class="text-center">No record found</td>
+                                    <td colspan="5" class="text-center">You have no land in <?php echo e(strtoupper($name)); ?> </td>
                                     </tr>
                                     <?php else: ?>
                                    

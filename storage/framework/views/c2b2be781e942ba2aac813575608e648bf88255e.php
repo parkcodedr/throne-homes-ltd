@@ -4,17 +4,17 @@
             <div class="left_col scroll-view">
 
                 <!-- sidebar menu -->
-                @include('admin.backlayouts.sidebar_menu')
+                <?php echo $__env->make('admin.backlayouts.sidebar_menu', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
                 <!-- /sidebar menu -->
 
                 <!-- /menu footer buttons -->
-                @include('admin.backlayouts.menu_footer_buttons')
+                <?php echo $__env->make('admin.backlayouts.menu_footer_buttons', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
                 <!-- /menu footer buttons -->
             </div>
         </div>
 
         <!-- top navigation -->
-        @include('admin.backlayouts.top_navigation')
+        <?php echo $__env->make('admin.backlayouts.top_navigation', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
         <!-- /top navigation -->
 
         <!-- page content -->
@@ -31,7 +31,7 @@
                         <div class="col-md-5 col-sm-5   form-group pull-right top_search">
                             <nav aria-label="breadcrumb">
                                 <ol class="breadcrumb pull-right" style="background: none">
-                                    <li class="breadcrumb-item"><a href="{{ url('/home') }}">Home</a></li>
+                                    <li class="breadcrumb-item"><a href="<?php echo e(url('/home')); ?>">Home</a></li>
                                     <li class="breadcrumb-item active" aria-current="page">Land's Prices</li>
                                 </ol>
                             </nav>
@@ -64,24 +64,24 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                    @if(count($userLands)==0)
+                                    <?php if(count($userLands)==0): ?>
                                     <tr>
-                                    <td colspan="5" class="text-center">You have no land in {{strtoupper($name) }} </td>
+                                        <td colspan="5" class="text-center">You have no house in <?php echo e(strtoupper($name)); ?> </td>
                                     </tr>
-                                    @else
+                                    <?php else: ?>
                                    
-                                        @foreach ($userLands as $land)
+                                        <?php $__currentLoopData = $userLands; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $land): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                             <tr>
-                                                <td>{{ $land->land_name }}</td>
-                                                <td>{{ $land->order_price }}</td>
-                                                <td>{{ $land->land_size." sqm" }}</td>
-                                                 <td>{{ $land->created_at}}</td>
-                                                <td>{{ $land->status}}</td>
+                                                <td><?php echo e($land->land_name); ?></td>
+                                                <td><?php echo e($land->order_price); ?></td>
+                                                <td><?php echo e($land->land_size." sqm"); ?></td>
+                                                 <td><?php echo e($land->created_at); ?></td>
+                                                <td><?php echo e($land->status); ?></td>
                                   
                                             </tr>
                                             
-                                        @endforeach
-                                        @endif
+                                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                        <?php endif; ?>
                                        
                                     </tbody>
                                 </table>
@@ -130,7 +130,8 @@
 <!-- /page content -->
 
 <!-- footer content -->
-@include('admin.backlayouts.menu_footer')
+<?php echo $__env->make('admin.backlayouts.menu_footer', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 <!-- /footer content -->
 </div>
 </div>
+<?php /**PATH C:\laravel\thronehomesltd\resources\views/admin/backlayouts/my_house.blade.php ENDPATH**/ ?>

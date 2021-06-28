@@ -130,10 +130,10 @@
                         <li class=""><a><i class="fa fa-book"></i> My House(s) <span
                                     class="fa fa-chevron-down"></span></a>
                             <ul class="nav child_menu">
-                                <li><a href="#">Lugbe Details</a></li>
-                                <li><a href="#">IDU Details</a></li>
-                                <li><a href="#">APO Details</a></li>
-                                <li><a href="#">ACO Details</a></li>
+                                <li><a href="<?php echo e(url('/my_house/lugbe')); ?>">Lugbe Details</a></li>
+                                <li><a href="<?php echo e(url('/my_house/idu')); ?>">IDU Details</a></li>
+                                <li><a href="<?php echo e(url('/my_house/apo')); ?>">APO Details</a></li>
+                                <li><a href="<?php echo e(url('/my_house/aco')); ?>">ACO Details</a></li>
                             </ul>
                         </li>
                     <?php endif; ?>

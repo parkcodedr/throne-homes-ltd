@@ -66,7 +66,7 @@
                                     <tbody>
                                     @if(count($userLands)==0)
                                     <tr>
-                                    <td colspan="5" class="text-center">No record found</td>
+                                        <td colspan="5" class="text-center">You have no house in {{strtoupper($name) }} </td>
                                     </tr>
                                     @else
                                    
