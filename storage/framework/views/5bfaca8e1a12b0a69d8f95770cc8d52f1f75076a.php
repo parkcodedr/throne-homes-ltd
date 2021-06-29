@@ -53,17 +53,18 @@
                                     <?php echo csrf_field(); ?>
                                    
                                    
-                                    <?php if(Session::has('success')): ?>
-                                    <p class="text-center text-success"><?php echo e(Session::get('success')); ?></p>
-                                    <?php endif; ?>
-                                    <?php if(Session::has('error')): ?>
-                                    <p class="text-center text-danger"><?php echo e(Session::get('error')); ?></p>
-                                    <?php endif; ?>
+                                    
                                     <div class="row">
                                         <div class="col-md-12">
                                             <h4><b>PERSONAL INFORMATION UPDATE REQUEST</b></h4>
                                         </div>
                                         <br>
+                                        <?php if(Session::has('success')): ?>
+                                    <p class="text-center text-success"><?php echo e(Session::get('success')); ?></p>
+                                    <?php endif; ?>
+                                    <?php if(Session::has('error')): ?>
+                                    <p class="text-center text-danger"><?php echo e(Session::get('error')); ?></p>
+                                    <?php endif; ?>
                                         <br>
                                         
                                         <div class="col-md-4">

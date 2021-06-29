@@ -17,8 +17,8 @@
                         <li class=""><a><i class="fa fa-book"></i> Subscriptions <span
                                     class="fa fa-chevron-down"></span></a>
                             <ul class="nav child_menu">
-                                <li><a href="#">Lands' Subscriptions</a></li>
-                                <li><a href="#">Houses' Subscriptions</a></li>
+                                <li><a href="<?php echo e(url('/land_subscription')); ?>">Lands' Subscriptions</a></li>
+                                <li><a href="<?php echo e(url('/house_subscription')); ?>">Houses' Subscriptions</a></li>
                             </ul>
                         </li>
                         <li class=""><a><i class="fa fa-bed"></i> Lands <span class="fa fa-chevron-down"></span></a>
@@ -60,8 +60,8 @@
                         <li class=""><a><i class="fa fa-book"></i> Subscriptions <span
                                     class="fa fa-chevron-down"></span></a>
                             <ul class="nav child_menu">
-                                <li><a href="#">Lands' Subscriptions</a></li>
-                                <li><a href="#">Houses' Subscriptions</a></li>
+                                <li><a href="<?php echo e(url('/land_subscription')); ?>">Lands' Subscriptions</a></li>
+                                <li><a href="<?php echo e(url('/house_subscription')); ?>">Houses' Subscriptions</a></li>
                             </ul>
                         </li>
                         <li class=""><a><i class="fa fa-bed"></i> Lands <span class="fa fa-chevron-down"></span></a>
@@ -114,8 +114,8 @@
                         <li class=""><a><i class="fa fa-book"></i> Subscriptions <span
                                     class="fa fa-chevron-down"></span></a>
                             <ul class="nav child_menu">
-                                <li><a href="#">Lands' Subscriptions</a></li>
-                                <li><a href="#">Houses' Subscriptions</a></li>
+                                <li><a href="<?php echo e(url('/land_subscription')); ?>">Lands' Subscriptions</a></li>
+                                <li><a href="<?php echo e(url('/house_subscription')); ?>">Houses' Subscriptions</a></li>
                             </ul>
                         </li>
                         <li class=""><a><i class="fa fa-book"></i> My Land(s) <span
@@ -151,8 +151,8 @@
                         <li class=""><a><i class="fa fa-book"></i> Subscriptions <span
                                     class="fa fa-chevron-down"></span></a>
                             <ul class="nav child_menu">
-                                <li><a href="/land_subscription">Lands' Subscriptions</a></li>
-                                <li><a href="/house_subscription">Houses' Subscriptions</a></li>
+                                <li><a href="<?php echo e(url('/land_subscription')); ?>">Lands' Subscriptions</a></li>
+                                <li><a href="<?php echo e(url('/house_subscription')); ?>">Houses' Subscriptions</a></li>
                             </ul>
                         </li>
                         <li class=""><a><i class="fa fa-book"></i> Influencer Revenue <span
@@ -181,8 +181,8 @@
                         <li class=""><a><i class="fa fa-book"></i> Subscriptions <span
                                     class="fa fa-chevron-down"></span></a>
                             <ul class="nav child_menu">
-                                <li><a href="#">Lands' Subscriptions</a></li>
-                                <li><a href="#">Houses' Subscriptions</a></li>
+                                <li><a href="<?php echo e(url('/land_subscription')); ?>">Lands' Subscriptions</a></li>
+                                <li><a href="<?php echo e(url('/house_subscription')); ?>">Houses' Subscriptions</a></li>
                             </ul>
                         </li>
                         <ul class="nav child_menu">
