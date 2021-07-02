@@ -726,7 +726,7 @@ class UserController extends Controller
         $userInfo = $user;
 
 
-        return view('admin/view_payment_under_process', [
+        return view('admin/payment_process_list', [
             "userInfo" => $userInfo,
             "paymentUnderProcessList" => $paymentUnderProcessList,
             "generalinfo" => $generalinfo, "role" => $user_role, "user" => $user,
@@ -746,9 +746,7 @@ class UserController extends Controller
     {
         //$updateRequestList = RequestNameUpdate::all();
 
-
-        $requestUser = RequestNameUpdate::where('user_id', $id)->first();
-
+        $paymentProcessDocument = PaymentUnderProcess::where('id', $id)->first();
 
         $admin_id = $this->regURL(); //this is determined by url owner while 1 = super admin
         $generalinfo['user'] = Auth::user();
@@ -776,8 +774,8 @@ class UserController extends Controller
 
 
 
-        return view('admin/update_request_single', [
-            "userInfo" => $requestUser,
+        return view('admin/payment_process_single', [
+            "paymentProcessDocument" => $paymentProcessDocument,
             "generalinfo" => $generalinfo, "role" => $user_role, "user" => $user,
             "totaladmins" => $generalinfo['totaladmins'], "totalstaffs" => $generalinfo["totalstaffs"],
             "totalusers" => $generalinfo["totalusers"], "total_lands" => $generalinfo["total_lands"],
@@ -789,6 +787,39 @@ class UserController extends Controller
             "siteinfos" => $generalinfo["siteinfos"],
             "title" => $generalinfo["title"]
         ]);
+    }
+
+    public function confirmPaymentDocument(Request $request, $id)
+    {
+        $request->validate([
+            "action" => "required"
+        ]);
+
+        $action = $request->action;
+        $admin_id = $this->regURL(); //this is determined by url owner while 1 = super admin
+        $order_id = PaymentUnderProcess::where('id', $id)->value('order_id');
+        $admin = "admin_id=" . $admin_id["admin_id"];
+        if ($action == "approve") {
+            $result = Daomniorder::where('id', $order_id)
+                ->update(["status" => "confirmed", "payment_mode" => $admin, "transaction_reference" => $admin]);
+            if ($result) {
+                PaymentUnderProcess::where('id', $id)->update(["payment_mode" => $admin, "payment_status" => $action, "confirmed_by" => $admin]);
+                return Redirect::back()
+                    ->with('success', 'Payment document approved successfully ');
+            } else {
+                return Redirect::back()
+                    ->with('error', 'unable to confirm payment document');
+            }
+        } else {
+            $decline =  PaymentUnderProcess::where('id', $id)->update(['payment_status' => $action]);
+            if ($decline) {
+                return Redirect::back()
+                    ->with('success', 'Payment document declined successfully ');
+            } else {
+                return Redirect::back()
+                    ->with('error', 'unable to decline payment document');
+            }
+        }
     }
 
 

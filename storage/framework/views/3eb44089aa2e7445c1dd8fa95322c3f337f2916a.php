@@ -36,6 +36,7 @@
                                     class="fa fa-chevron-down"></span></a>
                                     <ul class="nav child_menu">
                                     <li><a href="<?php echo e(url('/update_request_list')); ?>">View Update Request</a></li>
+                                    <li><a href="<?php echo e(url('/payment_process_list')); ?>">View Payment Documents</a></li>
                                    
                                 </ul>
                             <ul class="nav child_menu">
@@ -78,7 +79,8 @@
                         <li class=""><a><i class="fa fa-suitcase"></i> Management <span
                                     class="fa fa-chevron-down"></span></a>
                                     <ul class="nav child_menu">
-                                    <li><a href="<?php echo e(url('/update_request_list')); ?>">View Update Request</a></li>
+                                        <li><a href="<?php echo e(url('/update_request_list')); ?>">View Update Request</a></li>
+                                        <li><a href="<?php echo e(url('/payment_process_list')); ?>">View Payment Documents</a></li>
                                    
                                 </ul>
                                    

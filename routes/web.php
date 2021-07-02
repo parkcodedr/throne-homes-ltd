@@ -83,6 +83,10 @@ Route::get('/projects_details/{project_id}', 'OuterController@getProjectdetails'
 Route::get('/upload_payment/{id}', 'UserController@uploadPaymentUnderProcess')->name('upload_payment')->middleware('auth');
 Route::post('/upload_payment/{id}', 'UserController@storePaymentUnderProcess')->name('upload_payment')->middleware('auth');
 
+Route::get('/payment_process_list', 'UserController@viewAllPaymentDocument')->name('payment_process_list')->middleware('auth');
+Route::get('/payment_process_list/{id}', 'UserController@viewSinglePaymentDocument')->name('payment_process_list')->middleware('auth');
+Route::post('/confirm_payment_process/{id}', 'UserController@confirmPaymentDocument')->name('confirm_payment_process')->middleware('auth');
+
 Route::get('/land_subscription', 'UserController@landSubscription')->name('LandSub')->middleware('auth');
 Route::get('/house_subscription', 'UserController@houseSubscription')->name('HouseSub')->middleware('auth');
 
