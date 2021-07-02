@@ -36,7 +36,7 @@ class DaomniProjectsController extends Controller
         $admin_id = $this->regURL(); //this is determined by url owner while 1 = super admin
         $generalinfo['siteinfos'] = $this->getSiteinfosextract($admin_id);
         $generalinfo['total_lands'] = Daomniorder::where('id', '>', 0)->orderBy('id', 'desc')->count('id');
-        $generalinfo['lands'] = Daomnilandtypes::where('admin_id', $admin_id)->get();
+        $generalinfo['lands'] = Daomnilandtypes::where(['admin_id' => $admin_id["admin_id"], "page_name" => "Lands"])->get();
 
         foreach ($generalinfo['lands'] as $lands) {
             $rate = LandGrowthRate::where('land_id', (string)$lands["id"])->value('rate');
@@ -135,9 +135,9 @@ class DaomniProjectsController extends Controller
         $generalinfo['total_lands'] = Daomniorder::where('id', '>', 0)->orderBy('id', 'desc')->count('id');
         $generalinfo['lands'] = Daomnilandtypes::where('admin_id', $admin_id)->get();
 
-
-        $land_defails = Daomnilandtypes::where('admin_id', $admin_id)
-            ->select('lands_price', 'lands_name', 'lands_size', 'created_at')->get();
+        $land_defails = Daomnilandtypes::select('lands_price', 'lands_name', 'lands_size', 'created_at')
+            ->where(['admin_id' => $admin_id["admin_id"], "page_name" => "Lands"])
+            ->get();
 
 
 

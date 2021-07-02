@@ -4,35 +4,34 @@
             <div class="left_col scroll-view">
 
                 <!-- sidebar menu -->
-                @include('admin.backlayouts.sidebar_menu')
+                <?php echo $__env->make('admin.backlayouts.sidebar_menu', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
                 <!-- /sidebar menu -->
 
                 <!-- /menu footer buttons -->
-                @include('admin.backlayouts.menu_footer_buttons')
+                <?php echo $__env->make('admin.backlayouts.menu_footer_buttons', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
                 <!-- /menu footer buttons -->
             </div>
         </div>
 
         <!-- top navigation -->
-        @include('admin.backlayouts.top_navigation')
+        <?php echo $__env->make('admin.backlayouts.top_navigation', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
         <!-- /top navigation -->
 
         <!-- page content -->
         <div class="right_col" role="main">
             <!-- top tiles -->
-            
+         
             <div class="">
                 <div class="page-title">
                     <div class="title_left">
-                        <h3>Land's Prices</h3>
+                        <h3>Payment Under Process List</h3>
                     </div>
-
                     <div class="title_right">
                         <div class="col-md-5 col-sm-5   form-group pull-right top_search">
                             <nav aria-label="breadcrumb">
                                 <ol class="breadcrumb pull-right" style="background: none">
-                                    <li class="breadcrumb-item"><a href="{{ url('/home') }}">Home</a></li>
-                                    <li class="breadcrumb-item active" aria-current="page">Land's Prices</li>
+                                    <li class="breadcrumb-item"><a href="<?php echo e(url('/home')); ?>">Home</a></li>
+                                    <li class="breadcrumb-item active" aria-current="page">Payment Documents</li>
                                 </ol>
                             </nav>
                         </div>
@@ -55,38 +54,31 @@
                                     style="width:100%">
                                     <thead>
                                         <tr>
-        
-                                            <th>Land Name</th>
-                                            <th>Land Cost</th>
-                                           <th>Payment Plan</th>
-                                            <th>Transaction Date</th>
+                                            <th>Payment Plan</th>
+                                            <th>Payment Type</th>
+                                            <th>Amount Pay</th>
+                                            <th>Payment Mode</th>
+                                            <th>Payment Status </th>
+                                             <th>Confirmed by </th>
+                                             <th>Date </th>
                                             <th>Action</th>
-                                
                                         </tr>
                                     </thead>
                                     <tbody>
-                                    @if(count($landSubscription)==0)
-                                    <tr>
-                                    <td colspan="5" class="text-center">No record found</td>
-                                    </tr>
-                                    @else
-                                   
-                                        @foreach ($landSubscription as $land)
+                                        <?php $__currentLoopData = $paymentUnderProcessList; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $ProcessList): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                             <tr>
-                                                <td>{{ $land->land_name }}</td>
-                                                <td>{{ $land->order_price }}</td>     
-                                                <td>{{ $land->payment_plan }}</td>
-                                                 <td>{{ $land->created_at}}</td>
-                                                <td><a href="{{ url('/upload_payment')."/".$land->id }}">
-                                                    <button class="btn btn-warning" style="color:white">Upload Payment receipt</button></td>
-                                                </a>
-                                                    
-                                  
+                                                <td><?php echo e($ProcessList->payment_plan); ?></td>
+                                                <td><?php echo e($ProcessList->payment_type); ?></td>
+                                                <td><?php echo e($ProcessList->amount_pay); ?></td>
+                                                <td><?php echo e($ProcessList->payment_mode); ?></td>
+                                                <td><?php echo e($ProcessList->payment_status); ?></td>
+                                                 <td><?php echo e($ProcessList->confirmed_by); ?></td>
+                                                  <td><?php echo e($ProcessList->created_at); ?></td>
+                                                 <td><a href="<?php echo e(url('/payment_process_list') ."/".$ProcessList->id); ?>">View/Edit</a></td>
+                                                
+                                                
                                             </tr>
-                                            
-                                        @endforeach
-                                        @endif
-                                       
+                                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                     </tbody>
                                 </table>
 
@@ -134,7 +126,8 @@
 <!-- /page content -->
 
 <!-- footer content -->
-@include('admin.backlayouts.menu_footer')
+<?php echo $__env->make('admin.backlayouts.menu_footer', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 <!-- /footer content -->
 </div>
 </div>
+<?php /**PATH C:\laravel\thronehomesltd\resources\views/admin/backlayouts/payment_process_list.blade.php ENDPATH**/ ?>

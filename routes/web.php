@@ -80,9 +80,16 @@ Route::get('/projects', 'OuterController@getProjects')->name('projects');
 Route::get('/projects_details/{project_id}', 'OuterController@getProjectdetails')->name('project_details');
 
 
+Route::get('/upload_payment/{id}', 'UserController@uploadPaymentUnderProcess')->name('upload_payment')->middleware('auth');
+Route::post('/upload_payment/{id}', 'UserController@storePaymentUnderProcess')->name('upload_payment')->middleware('auth');
 
-Route::get('/land_subscription', 'DaomniInfluentialcouponsController@landSub')->name('LandSub');
-Route::get('/house_subscription', 'DaomniInfluentialcouponsController@houseSub')->name('HouseSub');
+Route::get('/payment_process_list', 'UserController@viewAllPaymentDocument')->name('payment_process_list')->middleware('auth');
+Route::get('/payment_process_list/{id}', 'UserController@viewSinglePaymentDocument')->name('payment_process_list')->middleware('auth');
+Route::post('/confirm_payment_process/{id}', 'UserController@confirmPaymentDocument')->name('confirm_payment_process')->middleware('auth');
+
+Route::get('/land_subscription', 'UserController@landSubscription')->name('LandSub')->middleware('auth');
+Route::get('/house_subscription', 'UserController@houseSubscription')->name('HouseSub')->middleware('auth');
+
 Route::get('/influencer_revenue', 'DaomniInfluentialcouponsController@revenue')->name('Revenue');
 Route::get('/influencer_setting', 'DaomniInfluentialcouponsController@settings')->name('Setting');
 
@@ -96,6 +103,9 @@ Route::get('/request_name_update', 'UserController@nameUpdateForm')->name('reque
 Route::post('/request_name_update', 'UserController@storeNameUpdateRequest')->name('request_name_update')->middleware('auth');
 Route::get('/my_lands/{name}', 'UserController@myLands')->name('my_lands')->middleware('auth');
 Route::get('/my_house/{name}', 'UserController@myHouse')->name('my_house')->middleware('auth');
+
+
+
 //admin
 Route::get('/update_request_list', 'UserController@updateRequestList')->name('update_request_list')->middleware('auth');
 Route::get('/update_request_list/{user_id}', 'UserController@updateRequestSingle')->name('update_request_list')->middleware('auth');

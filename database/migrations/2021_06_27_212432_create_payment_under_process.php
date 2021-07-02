@@ -22,8 +22,9 @@ class CreatePaymentUnderProcess extends Migration
             $table->string('payment_type');
             $table->decimal('amount_pay');
             $table->string('payment_status')->default('standby');
-            $table->string('payment_mode');
-            $table->string('confirmed_by');
+            $table->string('payment_mode')->nullable();
+            $table->text('payment_document');
+            $table->string('confirmed_by')->nullable();
             $table->timestamps();
         });
     }

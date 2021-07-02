@@ -65,22 +65,19 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                    @if(count($landSubscription)==0)
+                                    @if(count($houseSubscription)==0)
                                     <tr>
-                                    <td colspan="5" class="text-center">No record found</td>
+                                    <td colspan="5" class="text-center">No record found </td>
                                     </tr>
                                     @else
                                    
-                                        @foreach ($landSubscription as $land)
+                                        @foreach ($houseSubscription as $land)
                                             <tr>
                                                 <td>{{ $land->land_name }}</td>
                                                 <td>{{ $land->order_price }}</td>     
                                                 <td>{{ $land->payment_plan }}</td>
                                                  <td>{{ $land->created_at}}</td>
-                                                <td><a href="{{ url('/upload_payment')."/".$land->id }}">
-                                                    <button class="btn btn-warning" style="color:white">Upload Payment receipt</button></td>
-                                                </a>
-                                                    
+                                                <td><button class="btn btn-warning" style="color:white">Upload Payment receipt</button></td>
                                   
                                             </tr>
                                             

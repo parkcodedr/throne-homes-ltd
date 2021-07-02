@@ -131,7 +131,7 @@
             
                             </div>
                             <div class="col-md-4">
-                                <button class="btn btn-primary" type="submit">Approve Request</button>
+                                <button class="btn btn-primary" type="submit" {{$userInfo->approval_status=="Approved"?"disabled":""  }}>Approve Request</button>
                             </div>
                         </form>
                             </div>

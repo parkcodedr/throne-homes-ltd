@@ -24,15 +24,14 @@
             <div class="">
                 <div class="page-title">
                     <div class="title_left">
-                        <h3>Land's Prices</h3>
+                        <h5>Payment Document</h5>
                     </div>
-
                     <div class="title_right">
                         <div class="col-md-5 col-sm-5   form-group pull-right top_search">
                             <nav aria-label="breadcrumb">
                                 <ol class="breadcrumb pull-right" style="background: none">
                                     <li class="breadcrumb-item"><a href="{{ url('/home') }}">Home</a></li>
-                                    <li class="breadcrumb-item active" aria-current="page">Land's Prices</li>
+                                    <li class="breadcrumb-item active" aria-current="page">Upload Payment Document</li>
                                 </ol>
                             </nav>
                         </div>
@@ -45,51 +44,37 @@
                     <div class="col-md-12 col-sm-12">
                         <div class="x_panel">
                             <div class="x_title">
-                                <!--                                <h2>Default Example <small>Users</small></h2>-->
+                    
+                                <form action="/upload_payment/{{$id}}" method="POST" enctype="multipart/form-data">
+                                    @csrf
+                                    @error('photo')
+                                    <p class="text-center text-danger">{{$message}}</p>
+                                    @enderror
+                                    @if(Session::has('success'))
+                                    <p class="text-center text-success">{{Session::get('success')}}</p>
+                                    @endif
+                                    @if(Session::has('error'))
+                                    <p class="text-center text-danger">{{Session::get('error')}}</p>
+                                    @endif
+                                <div class="row">
+                                   
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="text-dark">Upload Payment Document</label>
+                                        <input class="form-control" name="file" type="file">
+                                        
+                                    </div>
+                                </div>
+                                <div class="col-md-4" style="margin-top: 26px">
+                                    <button class="btn btn-primary" type="submit">Upload</button>
+                                </div>
+                            </div>
+                        </form>
 
                                 <div class="clearfix"></div>
                             </div>
                             <div class="x_content">
-
-                                <table id="datatable-buttons" class="table table-striped table-bordered"
-                                    style="width:100%">
-                                    <thead>
-                                        <tr>
-        
-                                            <th>Land Name</th>
-                                            <th>Land Cost</th>
-                                           <th>Payment Plan</th>
-                                            <th>Transaction Date</th>
-                                            <th>Action</th>
-                                
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                    @if(count($landSubscription)==0)
-                                    <tr>
-                                    <td colspan="5" class="text-center">No record found</td>
-                                    </tr>
-                                    @else
-                                   
-                                        @foreach ($landSubscription as $land)
-                                            <tr>
-                                                <td>{{ $land->land_name }}</td>
-                                                <td>{{ $land->order_price }}</td>     
-                                                <td>{{ $land->payment_plan }}</td>
-                                                 <td>{{ $land->created_at}}</td>
-                                                <td><a href="{{ url('/upload_payment')."/".$land->id }}">
-                                                    <button class="btn btn-warning" style="color:white">Upload Payment receipt</button></td>
-                                                </a>
-                                                    
-                                  
-                                            </tr>
-                                            
-                                        @endforeach
-                                        @endif
-                                       
-                                    </tbody>
-                                </table>
-
+                               
                             </div>
                         </div>
                     </div>

@@ -40,7 +40,7 @@ class Kernel extends ConsoleKernel
                 $today_date = date('Y-m-d');
                 $valid = $today_date <= $valid_date ? true : false;
                 return $valid;
-            });;
+            });
     }
 
     /**

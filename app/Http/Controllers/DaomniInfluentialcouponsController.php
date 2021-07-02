@@ -96,7 +96,7 @@ class DaomniInfluentialcouponsController extends Controller
         $generalinfo['walletlimit'] = 1000000;
 
         $agent = Auth::user()->name;
-        $generalinfo['orders'] = Daomniorder::where("agent", $agent)->join("daomni_landtypes", "daomni_landtypes.id", "daomniorders.daomnilandtypes_id")
+        $generalinfo['orders'] = Daomniorder::where("status", "standby")->join("daomni_landtypes", "daomni_landtypes.id", "daomniorders.daomnilandtypes_id")
             ->where("daomni_landtypes.page_name", "Lands")
             ->select(["daomniorders.firstname", "daomniorders.lastname", "daomniorders.payment_plan", "daomniorders.order_price"
                 , "daomniorders.price_pay", "daomniorders.created_at", "daomni_landtypes.lands_name"])->get();
