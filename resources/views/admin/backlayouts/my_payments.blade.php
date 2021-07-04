@@ -45,15 +45,9 @@
                         <div class="x_panel">
                             <div class="x_title">
                                 <!--                                <h2>Default Example <small>Users</small></h2>-->
-                                @if(Session::has('success'))
-                                <p class="text-center text-success">{{Session::get('success')}}</p>
-                                @endif
-                                @if(Session::has('error'))
-                                <p class="text-center text-danger">{{Session::get('error')}}</p>
-                                @endif
-                                
+
+                                <div class="clearfix"></div>
                             </div>
-                            
                             <div class="x_content">
 
                                 <table id="datatable-buttons" class="table table-striped table-bordered"
@@ -63,73 +57,33 @@
                                             <th>Payment Plan</th>
                                             <th>Payment Type</th>
                                             <th>Amount Pay</th>
-                                            <th>Payment Mode</th>
+                                            <th>Date </th>
                                             <th>Payment Status </th>
-                                             <th>Confirmed by </th>
-                                             <th>Date </th>
-                                            
+                                          
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        {{-- @if(count($paymentProcessDocument)<1)
-                                        <tr>
-                                            <td class="text-center" colspan="7">
-                                        </tr>
-                                        @else --}}
-                                        
+                                        @foreach ($myPayments as $payment)
                                             <tr>
-                                                <td>{{ $paymentProcessDocument->payment_plan }}</td>
-                                                <td>{{ $paymentProcessDocument->payment_type }}</td>
-                                                <td>{{ $paymentProcessDocument->amount_pay }}</td>
-                                                <td>{{ $paymentProcessDocument->payment_mode}}</td>
-                                                <td>{{ $paymentProcessDocument->payment_status}}</td>
-                                                 <td>{{ $paymentProcessDocument->confirmed_by}}</td>
-                                                  <td>{{ $paymentProcessDocument->created_at}}</td>
+                                                <td>{{ $payment->payment_plan }}</td>
+                                                <td>{{ $payment->payment_type }}</td>
+                                                <td>{{ $payment->amount_pay }}</td>
+                                                
+                                             <td>{{ $payment->created_at}}</td>
+                                                  <td>{{ $payment->payment_status}}</td>
                                                 
                                                 
                                                 
                                             </tr>
-                                        
-                                        {{-- @endif --}}
+                                        @endforeach
                                     </tbody>
                                 </table>
-                               
-                               
+
                             </div>
-                            
-                            <section class="row">
-                                <div class="col-md-12">
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label class="text-dark h4">Payment Document</label>
-                                        <img src="{{ asset('uploads/documents/'.$paymentProcessDocument->payment_document ) }}"height="560px" width="450px" >
-                                    
-                                    </div>
-                
-                                </div>
-                                <form method="POST" action="{{url('/confirm_payment_process')."/".$paymentProcessDocument->id  }}">
-                                @csrf
-                               
-                                    
-                                <div class="col-md-3">
-                                    <select class="form-control form-select-lg mb-3" name="action">
-                                        <option selected>Select Action</option>
-                                        <option value="approve">Approve</option>
-                                        <option value="decline">decline</option>
-                                      </select>
-                                </div>
-                                <div class="col-md-3">
-                                    <button class="btn btn-success">Submit</button>
-                                </div>
-                            </form>
-                        </div>
-                                </section>
-                            
                         </div>
                     </div>
 
                 </div>
-                
             </div>
         </div>
         <!-- /page content -->

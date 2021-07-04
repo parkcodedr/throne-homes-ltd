@@ -60,6 +60,7 @@
                                             <th>Size</th>
                                           <th>Order Date</th>
                                             <th>Status</th>
+                                            <th>Payment</th>
                                 
                                         </tr>
                                     </thead>
@@ -77,6 +78,15 @@
                                                 <td><?php echo e($land->land_size." sqm"); ?></td>
                                                  <td><?php echo e($land->created_at); ?></td>
                                                 <td><?php echo e($land->status); ?></td>
+                                                <?php if($land->completePayment==false && $land->payment_plan=="installments"): ?>
+                                                <td>
+                                                    <a href="<?php echo e(url('/upload_payment')."/".$land->id); ?>">
+                                                    <button class="btn btn-info">Pay now</button>
+                                                    </a>
+                                                </td>
+                                                <?php else: ?>
+                                                <td>Completed</td>
+                                                <?php endif; ?>
                                   
                                             </tr>
                                             

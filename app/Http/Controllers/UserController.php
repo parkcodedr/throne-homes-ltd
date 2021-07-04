@@ -9,6 +9,7 @@ use App\Daomniorder;
 use App\Daomnilandtypes;
 use Illuminate\Http\Request;
 use App\Daomnisettingsiteinfos;
+use App\PaymentProcesses;
 use App\PaymentUnderProcess;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
@@ -331,7 +332,17 @@ class UserController extends Controller
             $land = Daomnilandtypes::select('lands_name', 'lands_size')
                 ->where("id", $landOrder['daomnilandtypes_id'],)
                 ->first();
+            if ($landOrder->payment_plan == "installments") {
+                $paymentCount = PaymentProcesses::where("order_id", $landOrder->id)->get();
+                $orderPrice = (int) Daomniorder::where("id", $landOrder->id)->value("order_price");
 
+                $total = $paymentCount->sum("amount_pay");
+                if ($total < $orderPrice) {
+                    $landOrder->completePayment = false;
+                } else {
+                    $landOrder->completePayment = true;
+                }
+            }
             $landOrder->land_name = $land["lands_name"];
             $landOrder->land_size = $land["lands_size"];
         }
@@ -590,6 +601,7 @@ class UserController extends Controller
     public function uploadPaymentUnderProcess(Request $request, $id)
     {
 
+
         $user = auth()->user();
         $user->password = null;
         $admin_id = $this->regURL(); //this is determined by url owner while 1 = super admin
@@ -637,7 +649,6 @@ class UserController extends Controller
 
     public function storePaymentUnderProcess(Request $request, $id)
     {
-
         $admin_id = $this->regURL(); //this is determined by url owner while 1 = super admin
         $generalinfo['user'] = Auth::user();
         $user = Auth::user();
@@ -741,6 +752,53 @@ class UserController extends Controller
             "title" => $generalinfo["title"]
         ]);
     }
+    public function myPayment()
+    {
+        $user = auth()->user();
+
+        $myPayments = PaymentUnderProcess::where("user_id", $user->id)->get();
+        $admin_id = $this->regURL(); //this is determined by url owner while 1 = super admin
+        $generalinfo['user'] = Auth::user();
+        $user = Auth::user();
+        $generalinfo['siteinfos'] = $this->getSiteinfosextract($admin_id);
+        $generalinfo['totaladmins'] = User::where('role_id', 2)->orderBy('id', 'desc')->count('id');
+
+        $generalinfo['totalusers'] = User::where('role_id', 3)->orderBy('id', 'desc')->count('id');
+        $generalinfo['totalstaffs'] = User::where('role_id', 'NOT LIKE', 1)->where('role_id', 'NOT LIKE', 3)->orderBy('id', 'desc')->count('id');
+        $generalinfo['totaladmins'] = User::where('role_id', 2)->orderBy('id', 'desc')->count('id');
+        $generalinfo['total_lands'] = Daomniorder::where('id', '>', 0)->orderBy('id', 'desc')->count('id');
+        $generalinfo['total_houses'] = Daomniorder::where('id', '>', 0)->orderBy('id', 'desc')->count('id');
+        $generalinfo['total_lands_bought'] = 0;
+        $generalinfo['total_houses_bought'] = 0;
+        $generalinfo['total_instalment'] = 0;
+        $generalinfo['totalrevenue'] = Daomniorder::where('id', '>', 0)->sum('price_pay');
+
+        $user_role = $getRole = Daomnirole::where('id', Auth::user()->role_id)->value("role");
+        $generalinfo['title'] = '::' . ucfirst(strtolower($user_role)) . ' home';
+
+        $generalinfo['role'] = $user_role;
+
+        $generalinfo['total_lands'] = Daomniorder::where('id', '>', 0)->orderBy('id', 'desc')->count('id');
+        $generalinfo['lands'] = Daomnilandtypes::where('admin_id', $admin_id)->get();
+
+        $userInfo = $user;
+
+
+        return view('admin/my_payments', [
+            "userInfo" => $userInfo,
+            "myPayments" => $myPayments,
+            "generalinfo" => $generalinfo, "role" => $user_role, "user" => $user,
+            "totaladmins" => $generalinfo['totaladmins'], "totalstaffs" => $generalinfo["totalstaffs"],
+            "totalusers" => $generalinfo["totalusers"], "total_lands" => $generalinfo["total_lands"],
+            "total_lands_bought" => $generalinfo["total_lands_bought"],
+            "total_houses" => $generalinfo["total_houses"],
+            "total_houses_bought" => $generalinfo["total_houses_bought"],
+            "total_instalment" => $generalinfo["total_instalment"],
+            "totalrevenue" => $generalinfo["totalrevenue"],
+            "siteinfos" => $generalinfo["siteinfos"],
+            "title" => $generalinfo["title"]
+        ]);
+    }
 
     public function viewSinglePaymentDocument(Request $request, $id)
     {
@@ -798,12 +856,24 @@ class UserController extends Controller
         $action = $request->action;
         $admin_id = $this->regURL(); //this is determined by url owner while 1 = super admin
         $order_id = PaymentUnderProcess::where('id', $id)->value('order_id');
+        $user_id = PaymentUnderProcess::where('id', $id)->value('user_id');
+
+        $orderPayment = Daomniorder::where('id', $id)->first();
+
         $admin = "admin_id=" . $admin_id["admin_id"];
         if ($action == "approve") {
             $result = Daomniorder::where('id', $order_id)
                 ->update(["status" => "confirmed", "payment_mode" => $admin, "transaction_reference" => $admin]);
             if ($result) {
-                PaymentUnderProcess::where('id', $id)->update(["payment_mode" => $admin, "payment_status" => $action, "confirmed_by" => $admin]);
+                PaymentUnderProcess::where('id', $id)->update(["payment_mode" => $admin, "approval_status" => $action, "confirmed_by" => $admin]);
+                $result = PaymentProcesses::create([
+                    "user_id" => $user_id, "admin_id" => $admin_id["admin_id"], "payment_plan" => $orderPayment->payment_plan,
+                    "order_id" => $orderPayment->id, "payment_type" => $orderPayment->payment_type,
+                    "amount_pay" => $orderPayment->price_pay,
+                    "payment_status" => $orderPayment->status,
+                    "payment_mode" => $admin, "approval_status" => $action, "confirmed_by" => $admin
+                ]);
+
                 return Redirect::back()
                     ->with('success', 'Payment document approved successfully ');
             } else {
@@ -811,7 +881,7 @@ class UserController extends Controller
                     ->with('error', 'unable to confirm payment document');
             }
         } else {
-            $decline =  PaymentUnderProcess::where('id', $id)->update(['payment_status' => $action]);
+            $decline =  PaymentUnderProcess::where('id', $id)->update(['approval_status' => $action]);
             if ($decline) {
                 return Redirect::back()
                     ->with('success', 'Payment document declined successfully ');

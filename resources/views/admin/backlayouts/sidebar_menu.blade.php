@@ -138,6 +138,12 @@
                                 <li><a href="{{ url('/my_house/aco') }}">ACO Details</a></li>
                             </ul>
                         </li>
+                        <li class=""><a><i class="fa fa-bed"></i> Payments <span class="fa fa-chevron-down"></span></a>
+                            <ul class="nav child_menu">
+                                <li><a href="{{ url('/my_payments') }}">My Payments</a></li>
+                        
+                            </ul>
+                        </li>
                     @endif
 
                     @if ($role == 'agent')

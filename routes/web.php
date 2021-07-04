@@ -82,6 +82,7 @@ Route::get('/projects_details/{project_id}', 'OuterController@getProjectdetails'
 
 Route::get('/upload_payment/{id}', 'UserController@uploadPaymentUnderProcess')->name('upload_payment')->middleware('auth');
 Route::post('/upload_payment/{id}', 'UserController@storePaymentUnderProcess')->name('upload_payment')->middleware('auth');
+Route::get('/my_payments', 'UserController@myPayment')->name('my_payments')->middleware('auth');
 
 Route::get('/payment_process_list', 'UserController@viewAllPaymentDocument')->name('payment_process_list')->middleware('auth');
 Route::get('/payment_process_list/{id}', 'UserController@viewSinglePaymentDocument')->name('payment_process_list')->middleware('auth');

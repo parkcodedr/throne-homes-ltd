@@ -45,15 +45,9 @@
                         <div class="x_panel">
                             <div class="x_title">
                                 <!--                                <h2>Default Example <small>Users</small></h2>-->
-                                <?php if(Session::has('success')): ?>
-                                <p class="text-center text-success"><?php echo e(Session::get('success')); ?></p>
-                                <?php endif; ?>
-                                <?php if(Session::has('error')): ?>
-                                <p class="text-center text-danger"><?php echo e(Session::get('error')); ?></p>
-                                <?php endif; ?>
-                                
+
+                                <div class="clearfix"></div>
                             </div>
-                            
                             <div class="x_content">
 
                                 <table id="datatable-buttons" class="table table-striped table-bordered"
@@ -63,69 +57,33 @@
                                             <th>Payment Plan</th>
                                             <th>Payment Type</th>
                                             <th>Amount Pay</th>
-                                            <th>Payment Mode</th>
+                                            <th>Date </th>
                                             <th>Payment Status </th>
-                                             <th>Confirmed by </th>
-                                             <th>Date </th>
-                                            
+                                          
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        
-                                        
+                                        <?php $__currentLoopData = $myPayments; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $payment): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                             <tr>
-                                                <td><?php echo e($paymentProcessDocument->payment_plan); ?></td>
-                                                <td><?php echo e($paymentProcessDocument->payment_type); ?></td>
-                                                <td><?php echo e($paymentProcessDocument->amount_pay); ?></td>
-                                                <td><?php echo e($paymentProcessDocument->payment_mode); ?></td>
-                                                <td><?php echo e($paymentProcessDocument->payment_status); ?></td>
-                                                 <td><?php echo e($paymentProcessDocument->confirmed_by); ?></td>
-                                                  <td><?php echo e($paymentProcessDocument->created_at); ?></td>
+                                                <td><?php echo e($payment->payment_plan); ?></td>
+                                                <td><?php echo e($payment->payment_type); ?></td>
+                                                <td><?php echo e($payment->amount_pay); ?></td>
+                                                
+                                             <td><?php echo e($payment->created_at); ?></td>
+                                                  <td><?php echo e($payment->payment_status); ?></td>
                                                 
                                                 
                                                 
                                             </tr>
-                                        
-                                        
+                                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                     </tbody>
                                 </table>
-                               
-                               
+
                             </div>
-                            
-                            <section class="row">
-                                <div class="col-md-12">
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label class="text-dark h4">Payment Document</label>
-                                        <img src="<?php echo e(asset('uploads/documents/'.$paymentProcessDocument->payment_document )); ?>"height="560px" width="450px" >
-                                    
-                                    </div>
-                
-                                </div>
-                                <form method="POST" action="<?php echo e(url('/confirm_payment_process')."/".$paymentProcessDocument->id); ?>">
-                                <?php echo csrf_field(); ?>
-                               
-                                    
-                                <div class="col-md-3">
-                                    <select class="form-control form-select-lg mb-3" name="action">
-                                        <option selected>Select Action</option>
-                                        <option value="approve">Approve</option>
-                                        <option value="decline">decline</option>
-                                      </select>
-                                </div>
-                                <div class="col-md-3">
-                                    <button class="btn btn-success">Submit</button>
-                                </div>
-                            </form>
-                        </div>
-                                </section>
-                            
                         </div>
                     </div>
 
                 </div>
-                
             </div>
         </div>
         <!-- /page content -->
@@ -169,4 +127,4 @@
 <!-- /footer content -->
 </div>
 </div>
-<?php /**PATH C:\laravel\thronehomesltd\resources\views/admin/backlayouts/payment_process_single.blade.php ENDPATH**/ ?>
+<?php /**PATH C:\laravel\thronehomesltd\resources\views/admin/backlayouts/my_payments.blade.php ENDPATH**/ ?>

@@ -60,6 +60,7 @@
                                             <th>Size</th>
                                           <th>Order Date</th>
                                             <th>Status</th>
+                                            <th>Payment</th>
                                 
                                         </tr>
                                     </thead>
@@ -77,6 +78,15 @@
                                                 <td>{{ $land->land_size." sqm" }}</td>
                                                  <td>{{ $land->created_at}}</td>
                                                 <td>{{ $land->status}}</td>
+                                                @if($land->completePayment==false && $land->payment_plan=="installments")
+                                                <td>
+                                                    <a href="{{ url('/upload_payment')."/".$land->id }}">
+                                                    <button class="btn btn-info">Pay now</button>
+                                                    </a>
+                                                </td>
+                                                @else
+                                                <td>Completed</td>
+                                                @endif
                                   
                                             </tr>
                                             
