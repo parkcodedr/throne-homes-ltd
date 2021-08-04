@@ -37,7 +37,9 @@
                                     <ul class="nav child_menu">
                                     <li><a href="{{ url('/update_request_list') }}">View Update Request</a></li>
                                     <li><a href="{{ url('/payment_process_list') }}">View Payment Documents</a></li>
-                                   
+                                    <li><a href="{{ url('/users') }}">View All Users</a></li>
+                                        <li><a href="{{ url('/orders') }}">View All Orders</a></li>
+                                        <li><a href="{{ url('/contacts') }}">View All Contacts</a></li>
                                 </ul>
                             <ul class="nav child_menu">
                                 <li><a href="#">Add New Land</a></li>
@@ -81,6 +83,10 @@
                                     <ul class="nav child_menu">
                                         <li><a href="{{ url('/update_request_list') }}">View Update Request</a></li>
                                         <li><a href="{{ url('/payment_process_list') }}">View Payment Documents</a></li>
+                                        <li><a href="{{ url('/payment_process_list') }}">View Payment Documents</a></li>
+                                        <li><a href="{{ url('/users') }}">View All Users</a></li>
+                                        <li><a href="{{ url('/orders') }}">View All Orders</a></li>
+                                        <li><a href="{{ url('/contacts') }}">View All Contacts</a></li>
                                    
                                 </ul>
                                    
@@ -176,7 +182,9 @@
                                     class="fa fa-chevron-down"></span></a>
                                     <ul class="nav child_menu">
                                         <li><a href="{{ url('/request_name_update') }}">Request name update</a></li>
-                                       
+                                        <li><a href="{{ url('/users') }}">View All Users</a></li>
+                                        <li><a href="{{ url('/orders') }}">View All Orders</a></li>
+                                        <li><a href="{{ url('/contacts') }}">View All Contacts</a></li>
                                     </ul>
                             <ul class="nav child_menu">
                                 <li><a href="/influencer_setting">Add / Modify Code</a></li>

@@ -58,7 +58,7 @@
                                             <th>Payment Type</th>
                                             <th>Amount Pay</th>
                                             <th>Payment Mode</th>
-                                            <th>Payment Status </th>
+                                            <th>Approval Status </th>
                                              <th>Confirmed by </th>
                                              <th>Date </th>
                                             <th>Action</th>
@@ -71,7 +71,7 @@
                                                 <td><?php echo e($ProcessList->payment_type); ?></td>
                                                 <td><?php echo e($ProcessList->amount_pay); ?></td>
                                                 <td><?php echo e($ProcessList->payment_mode); ?></td>
-                                                <td><?php echo e($ProcessList->payment_status); ?></td>
+                                                <td><?php echo e($ProcessList->approval_status); ?></td>
                                                  <td><?php echo e($ProcessList->confirmed_by); ?></td>
                                                   <td><?php echo e($ProcessList->created_at); ?></td>
                                                  <td><a href="<?php echo e(url('/payment_process_list') ."/".$ProcessList->id); ?>">View/Edit</a></td>

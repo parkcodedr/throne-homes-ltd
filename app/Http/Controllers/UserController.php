@@ -687,6 +687,7 @@ class UserController extends Controller
             "user_id" => $user_id, "admin_id" => $admin_id["admin_id"], "payment_plan" => $orderPayment->payment_plan,
             "order_id" => $orderPayment->id, "payment_type" => $orderPayment->payment_type,
             "amount_pay" => $orderPayment->price_pay, "payment_status" => $orderPayment->status,
+            "approval_status" => "Pending",
             "payment_mode" => $orderPayment->payment_mode,
             "payment_document" => $fileName,
         ]);
@@ -866,7 +867,7 @@ class UserController extends Controller
                 ->update(["status" => "confirmed", "payment_mode" => $admin, "transaction_reference" => $admin]);
             if ($result) {
                 PaymentUnderProcess::where('id', $id)->update(["payment_mode" => $admin, "approval_status" => $action, "confirmed_by" => $admin]);
-                $result = PaymentProcesses::create([
+                PaymentProcesses::create([
                     "user_id" => $user_id, "admin_id" => $admin_id["admin_id"], "payment_plan" => $orderPayment->payment_plan,
                     "order_id" => $orderPayment->id, "payment_type" => $orderPayment->payment_type,
                     "amount_pay" => $orderPayment->price_pay,
@@ -881,7 +882,7 @@ class UserController extends Controller
                     ->with('error', 'unable to confirm payment document');
             }
         } else {
-            $decline =  PaymentUnderProcess::where('id', $id)->update(['approval_status' => $action]);
+            $decline =  PaymentUnderProcess::where('id', $id)->update(['approval_status' => $action, "confirmed_by" => $admin]);
             if ($decline) {
                 return Redirect::back()
                     ->with('success', 'Payment document declined successfully ');
@@ -919,5 +920,109 @@ class UserController extends Controller
         }
         $generalinfo['siteinfos'] = Daomnisettingsiteinfos::where('admin_id', $this->admin_id)->orderBy('id', 'asc')->first();
         return $generalinfo['siteinfos'];
+    }
+
+    public function getAllUsers()
+    {
+        $admin_id = auth()->user()->admin_id;
+        $users = User::where('admin_id', $admin_id)->get();
+
+        $admin_id = $this->regURL(); //this is determined by url owner while 1 = super admin
+        $generalinfo['user'] = Auth::user();
+        $user = Auth::user();
+        $generalinfo['siteinfos'] = $this->getSiteinfosextract($admin_id);
+        $generalinfo['totaladmins'] = User::where('role_id', 2)->orderBy('id', 'desc')->count('id');
+
+        $generalinfo['totalusers'] = User::where('role_id', 3)->orderBy('id', 'desc')->count('id');
+        $generalinfo['totalstaffs'] = User::where('role_id', 'NOT LIKE', 1)->where('role_id', 'NOT LIKE', 3)->orderBy('id', 'desc')->count('id');
+        $generalinfo['totaladmins'] = User::where('role_id', 2)->orderBy('id', 'desc')->count('id');
+        $generalinfo['total_lands'] = Daomniorder::where('id', '>', 0)->orderBy('id', 'desc')->count('id');
+        $generalinfo['total_houses'] = Daomniorder::where('id', '>', 0)->orderBy('id', 'desc')->count('id');
+        $generalinfo['total_lands_bought'] = 0;
+        $generalinfo['total_houses_bought'] = 0;
+        $generalinfo['total_instalment'] = 0;
+        $generalinfo['totalrevenue'] = Daomniorder::where('id', '>', 0)->sum('price_pay');
+
+        $user_role = $getRole = Daomnirole::where('id', Auth::user()->role_id)->value("role");
+        $generalinfo['title'] = '::' . ucfirst(strtolower($user_role)) . ' home';
+
+        $generalinfo['role'] = $user_role;
+
+        $generalinfo['total_lands'] = Daomniorder::where('id', '>', 0)->orderBy('id', 'desc')->count('id');
+        $generalinfo['lands'] = Daomnilandtypes::where('admin_id', $admin_id)->get();
+
+        $land_defails = Daomnilandtypes::select('lands_price', 'lands_name', 'lands_size', 'created_at')
+            ->where(['admin_id' => $admin_id["admin_id"], "page_name" => "Lands"])
+            ->get();
+
+
+
+        return view('admin/all_users', [
+            "users" => $users,
+            "generalinfo" => $generalinfo, "role" => $user_role, "user" => $user,
+            "totaladmins" => $generalinfo['totaladmins'], "totalstaffs" => $generalinfo["totalstaffs"],
+            "totalusers" => $generalinfo["totalusers"], "total_lands" => $generalinfo["total_lands"],
+            "total_lands_bought" => $generalinfo["total_lands_bought"],
+            "total_houses" => $generalinfo["total_houses"],
+            "total_houses_bought" => $generalinfo["total_houses_bought"],
+            "total_instalment" => $generalinfo["total_instalment"],
+            "totalrevenue" => $generalinfo["totalrevenue"],
+            "siteinfos" => $generalinfo["siteinfos"],
+            "title" => $generalinfo["title"]
+        ]);
+    }
+
+    public function getAllOrders()
+    {
+        $admin_id = auth()->user()->admin_id;
+        $orders = Daomniorder::where('admin_id', $admin_id)->get();
+
+
+        $admin_id = $this->regURL(); //this is determined by url owner while 1 = super admin
+        $generalinfo['user'] = Auth::user();
+        $user = Auth::user();
+        $generalinfo['siteinfos'] = $this->getSiteinfosextract($admin_id);
+        $generalinfo['totaladmins'] = User::where('role_id', 2)->orderBy('id', 'desc')->count('id');
+
+        $generalinfo['totalusers'] = User::where('role_id', 3)->orderBy('id', 'desc')->count('id');
+        $generalinfo['totalstaffs'] = User::where('role_id', 'NOT LIKE', 1)->where('role_id', 'NOT LIKE', 3)->orderBy('id', 'desc')->count('id');
+        $generalinfo['totaladmins'] = User::where('role_id', 2)->orderBy('id', 'desc')->count('id');
+        $generalinfo['total_lands'] = Daomniorder::where('id', '>', 0)->orderBy('id', 'desc')->count('id');
+        $generalinfo['total_houses'] = Daomniorder::where('id', '>', 0)->orderBy('id', 'desc')->count('id');
+        $generalinfo['total_lands_bought'] = 0;
+        $generalinfo['total_houses_bought'] = 0;
+        $generalinfo['total_instalment'] = 0;
+        $generalinfo['totalrevenue'] = Daomniorder::where('id', '>', 0)->sum('price_pay');
+
+        $user_role = $getRole = Daomnirole::where('id', Auth::user()->role_id)->value("role");
+        $generalinfo['title'] = '::' . ucfirst(strtolower($user_role)) . ' home';
+
+        $generalinfo['role'] = $user_role;
+
+        $generalinfo['total_lands'] = Daomniorder::where('id', '>', 0)->orderBy('id', 'desc')->count('id');
+        $generalinfo['lands'] = Daomnilandtypes::where('admin_id', $admin_id)->get();
+
+        $land_defails = Daomnilandtypes::select('lands_price', 'lands_name', 'lands_size', 'created_at')
+            ->where(['admin_id' => $admin_id["admin_id"], "page_name" => "Lands"])
+            ->get();
+
+
+
+        return view('admin/all_orders', [
+            "orders" => $orders,
+            "generalinfo" => $generalinfo, "role" => $user_role, "user" => $user,
+            "totaladmins" => $generalinfo['totaladmins'], "totalstaffs" => $generalinfo["totalstaffs"],
+            "totalusers" => $generalinfo["totalusers"], "total_lands" => $generalinfo["total_lands"],
+            "total_lands_bought" => $generalinfo["total_lands_bought"],
+            "total_houses" => $generalinfo["total_houses"],
+            "total_houses_bought" => $generalinfo["total_houses_bought"],
+            "total_instalment" => $generalinfo["total_instalment"],
+            "totalrevenue" => $generalinfo["totalrevenue"],
+            "siteinfos" => $generalinfo["siteinfos"],
+            "title" => $generalinfo["title"]
+        ]);
+    }
+    public function getAllContacts()
+    {
     }
 }

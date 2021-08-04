@@ -54,23 +54,25 @@
                                     style="width:100%">
                                     <thead>
                                         <tr>
+                                            <th>ID</th>
                                             <th>Payment Plan</th>
                                             <th>Payment Type</th>
                                             <th>Amount Pay</th>
                                             <th>Date </th>
-                                            <th>Payment Status </th>
+                                            <th>Approval Status </th>
                                           
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <?php $__currentLoopData = $myPayments; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $payment): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                             <tr>
+                                                <td><?php echo e($payment->id); ?></td>
                                                 <td><?php echo e($payment->payment_plan); ?></td>
                                                 <td><?php echo e($payment->payment_type); ?></td>
                                                 <td><?php echo e($payment->amount_pay); ?></td>
                                                 
                                              <td><?php echo e($payment->created_at); ?></td>
-                                                  <td><?php echo e($payment->payment_status); ?></td>
+                                                  <td><?php echo e($payment->approval_status); ?></td>
                                                 
                                                 
                                                 

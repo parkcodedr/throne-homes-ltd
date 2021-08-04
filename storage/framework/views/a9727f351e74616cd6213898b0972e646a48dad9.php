@@ -65,6 +65,7 @@
                                             <th>Amount Pay</th>
                                             <th>Payment Mode</th>
                                             <th>Payment Status </th>
+                                            <th>Approval Status </th>
                                              <th>Confirmed by </th>
                                              <th>Date </th>
                                             
@@ -79,6 +80,7 @@
                                                 <td><?php echo e($paymentProcessDocument->amount_pay); ?></td>
                                                 <td><?php echo e($paymentProcessDocument->payment_mode); ?></td>
                                                 <td><?php echo e($paymentProcessDocument->payment_status); ?></td>
+                                                <td><?php echo e($paymentProcessDocument->approval_status); ?></td>
                                                  <td><?php echo e($paymentProcessDocument->confirmed_by); ?></td>
                                                   <td><?php echo e($paymentProcessDocument->created_at); ?></td>
                                                 
