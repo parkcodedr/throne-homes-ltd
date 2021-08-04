@@ -4,17 +4,17 @@
             <div class="left_col scroll-view">
 
                 <!-- sidebar menu -->
-                <?php echo $__env->make('admin.backlayouts.sidebar_menu', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+                @include('admin.backlayouts.sidebar_menu')
                 <!-- /sidebar menu -->
 
                 <!-- /menu footer buttons -->
-                <?php echo $__env->make('admin.backlayouts.menu_footer_buttons', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+                @include('admin.backlayouts.menu_footer_buttons')
                 <!-- /menu footer buttons -->
             </div>
         </div>
 
         <!-- top navigation -->
-        <?php echo $__env->make('admin.backlayouts.top_navigation', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+        @include('admin.backlayouts.top_navigation')
         <!-- /top navigation -->
 
         <!-- page content -->
@@ -31,7 +31,7 @@
                         <div class="col-md-5 col-sm-5   form-group pull-right top_search">
                             <nav aria-label="breadcrumb">
                                 <ol class="breadcrumb pull-right" style="background: none">
-                                    <li class="breadcrumb-item"><a href="<?php echo e(url('/home')); ?>">Home</a></li>
+                                    <li class="breadcrumb-item"><a href="{{ url('/home') }}">Home</a></li>
                                     <li class="breadcrumb-item active" aria-current="page">Orders</li>
                                 </ol>
                             </nav>
@@ -56,47 +56,38 @@
                                     <thead>
                                         <tr>
                                             <th>Serial</th>
-                                            <th>Title</th>
                                             <th>Name</th>
-                                            <th>Middlename</th>
-                                            <th>Lastname</th>
+                                            <th>Email</th>
+                                            <th>Subject</th>
+                                            <th>Phone</th>
                                            
-                                         <th>Email</th>
+                                         <th>Message</th>
                                          
-                                         <th>Address</th>
+                                         
                                        
-                                         <th>Phone</th>
-                                         <th>Action</th>
+                                         <th>Date</th>
+                                      
                                         
                                         
                                         </tr>
                                     </thead>
                                     <tbody>
                                       
-                                        <?php $__currentLoopData = $orders; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key => $order): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                        @foreach ($contacts as $key => $contact)
                                         
                                             <tr>
-                                                <td><?php echo e($key+1); ?></td>
-                                                <td><?php echo e($order->title); ?></td>
-                                                <td><?php echo e($order->firstname); ?></td>
-                                                <td><?php echo e($order->lastname); ?></td>
-                                                <td><?php echo e($order->othername); ?></td>
+                                                <td>{{ $key+1 }}</td>
+                                                <td>{{ $contact->name }}</td>
+                                                <td>{{ $contact->email }}</td>
+                                                <td>{{ $contact->subject }}</td>
+                                                <td>{{ $contact->phone}}</td>
+                                                <td>{{ $contact->message}}</td>
                                                
-                                                <td><?php echo e($order->email); ?></td>
-                                                <td><?php echo e($order->address); ?></td>
-                                               
-                                                <td><?php echo e($order->phone); ?></td>
-                                                <td>
-                                                    <a href="<?php echo e(url('/orders')."/".$order->id); ?>">
-                                                        <button class="btn btn-primary">
-                                                            View
-                                                        </button>
-                                                    </a>
-                                                   
-                                                </td>
+                                                <td>{{ $contact->created_at}}</td>
+                                                
                                   
                                             </tr>
-                                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                        @endforeach
                                     </tbody>
                                 </table>
 
@@ -144,8 +135,7 @@
 <!-- /page content -->
 
 <!-- footer content -->
-<?php echo $__env->make('admin.backlayouts.menu_footer', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+@include('admin.backlayouts.menu_footer')
 <!-- /footer content -->
 </div>
 </div>
-<?php /**PATH C:\laravel\thronehomesltd\resources\views/admin/backlayouts/all_orders.blade.php ENDPATH**/ ?>

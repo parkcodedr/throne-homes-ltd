@@ -56,44 +56,35 @@
                                     <thead>
                                         <tr>
                                             <th>Serial</th>
-                                            <th>Title</th>
                                             <th>Name</th>
-                                            <th>Middlename</th>
-                                            <th>Lastname</th>
+                                            <th>Email</th>
+                                            <th>Subject</th>
+                                            <th>Phone</th>
                                            
-                                         <th>Email</th>
+                                         <th>Message</th>
                                          
-                                         <th>Address</th>
+                                         
                                        
-                                         <th>Phone</th>
-                                         <th>Action</th>
+                                         <th>Date</th>
+                                      
                                         
                                         
                                         </tr>
                                     </thead>
                                     <tbody>
                                       
-                                        <?php $__currentLoopData = $orders; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key => $order): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                        <?php $__currentLoopData = $contacts; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key => $contact): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                         
                                             <tr>
                                                 <td><?php echo e($key+1); ?></td>
-                                                <td><?php echo e($order->title); ?></td>
-                                                <td><?php echo e($order->firstname); ?></td>
-                                                <td><?php echo e($order->lastname); ?></td>
-                                                <td><?php echo e($order->othername); ?></td>
+                                                <td><?php echo e($contact->name); ?></td>
+                                                <td><?php echo e($contact->email); ?></td>
+                                                <td><?php echo e($contact->subject); ?></td>
+                                                <td><?php echo e($contact->phone); ?></td>
+                                                <td><?php echo e($contact->message); ?></td>
                                                
-                                                <td><?php echo e($order->email); ?></td>
-                                                <td><?php echo e($order->address); ?></td>
-                                               
-                                                <td><?php echo e($order->phone); ?></td>
-                                                <td>
-                                                    <a href="<?php echo e(url('/orders')."/".$order->id); ?>">
-                                                        <button class="btn btn-primary">
-                                                            View
-                                                        </button>
-                                                    </a>
-                                                   
-                                                </td>
+                                                <td><?php echo e($contact->created_at); ?></td>
+                                                
                                   
                                             </tr>
                                         <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
@@ -148,4 +139,4 @@
 <!-- /footer content -->
 </div>
 </div>
-<?php /**PATH C:\laravel\thronehomesltd\resources\views/admin/backlayouts/all_orders.blade.php ENDPATH**/ ?>
+<?php /**PATH C:\laravel\thronehomesltd\resources\views/admin/backlayouts/all_contacts.blade.php ENDPATH**/ ?>
