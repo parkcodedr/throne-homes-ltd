@@ -4,17 +4,17 @@
             <div class="left_col scroll-view">
 
                 <!-- sidebar menu -->
-                @include('admin.backlayouts.sidebar_menu')
+                <?php echo $__env->make('admin.backlayouts.sidebar_menu', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
                 <!-- /sidebar menu -->
 
                 <!-- /menu footer buttons -->
-                @include('admin.backlayouts.menu_footer_buttons')
+                <?php echo $__env->make('admin.backlayouts.menu_footer_buttons', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
                 <!-- /menu footer buttons -->
             </div>
         </div>
 
         <!-- top navigation -->
-        @include('admin.backlayouts.top_navigation')
+        <?php echo $__env->make('admin.backlayouts.top_navigation', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
         <!-- /top navigation -->
 
         <!-- page content -->
@@ -31,7 +31,7 @@
                         <div class="col-md-5 col-sm-5   form-group pull-right top_search">
                             <nav aria-label="breadcrumb">
                                 <ol class="breadcrumb pull-right" style="background: none">
-                                    <li class="breadcrumb-item"><a href="{{ url('/home') }}">Home</a></li>
+                                    <li class="breadcrumb-item"><a href="<?php echo e(url('/home')); ?>">Home</a></li>
                                     <li class="breadcrumb-item active" aria-current="page">Orders</li>
                                 </ol>
                             </nav>
@@ -58,94 +58,94 @@
                                 <dl class="col-md-12">
                                     <div class="col-md-4">
                                         <dt>Title</dt>
-                                    <dd>{{ $order->title }}</dd>
+                                    <dd><?php echo e($order->title); ?></dd>
                                     <dt>Firstname</dt>
-                                    <dd>{{ $order->firstname }}</dd>
+                                    <dd><?php echo e($order->firstname); ?></dd>
                                     <dt>Lastname</dt>
-                                    <dd>{{ $order->lastname }}</dd>
+                                    <dd><?php echo e($order->lastname); ?></dd>
                                     </div>
                                     <div class="col-md-4">
                                         <dt>Othername</dt>
-                                    <dd>{{ $order->othername }}</dd>
+                                    <dd><?php echo e($order->othername); ?></dd>
                                     <dt>Date of birth</dt>
-                                    <dd>{{ $order->date_of_birth }}</dd>
+                                    <dd><?php echo e($order->date_of_birth); ?></dd>
                                     <dt> Gender</dt>
-                                    <dd>{{ $order->gender }}</dd>
+                                    <dd><?php echo e($order->gender); ?></dd>
                                     </div>
                                     <div class="col-md-4">
                                         <dt>Email</dt>
-                                    <dd>{{ $order->email }}</dd>
+                                    <dd><?php echo e($order->email); ?></dd>
                                     <dt>Phone</dt>
-                                    <dd>{{ $order->phone }}</dd>
+                                    <dd><?php echo e($order->phone); ?></dd>
                                     <dt>Address</dt>
-                                    <dd>{{ $order->address }}</dd>
+                                    <dd><?php echo e($order->address); ?></dd>
                                     </div>
                                     <div class="col-md-4">
                                         <dt>Order Category</dt>
-                                    <dd>{{ $order->group }}</dd>
+                                    <dd><?php echo e($order->group); ?></dd>
                                     <dt>Payment Mode</dt>
-                                    <dd>{{ $order->payment_mode }}</dd>
+                                    <dd><?php echo e($order->payment_mode); ?></dd>
                                     <dt>Payment Plan</dt>
-                                    <dd>{{ $order->payment_plan }}</dd>
+                                    <dd><?php echo e($order->payment_plan); ?></dd>
                                     </div>
                                     <div class="col-md-4">
                                         <dt>Amount</dt>
-                                    <dd>{{ $order->order_price }}</dd>
+                                    <dd><?php echo e($order->order_price); ?></dd>
                                     <dt>Installment</dt>
-                                    <dd>{{ $order->price_pay }}</dd>
+                                    <dd><?php echo e($order->price_pay); ?></dd>
                                     <dt> Monthly Pay</dt>
-                                    <dd>{{ $order->pay_monthly }}</dd>
+                                    <dd><?php echo e($order->pay_monthly); ?></dd>
                                     </div>
                                     <div class="col-md-4">
                                         <dt>Employer</dt>
-                                    <dd>{{ $order->employer }}</dd>
+                                    <dd><?php echo e($order->employer); ?></dd>
                                     <dt>Office Address</dt>
-                                    <dd>{{ $order->officeaddress }}</dd>
+                                    <dd><?php echo e($order->officeaddress); ?></dd>
                                     <dt> City</dt>
-                                    <dd>{{ $order->city }}</dd>
+                                    <dd><?php echo e($order->city); ?></dd>
                                     </div>
                                   
                                         <p class="lead">Next of Kin</p>
                                         <hr>
                                         <div class="col-md-4">
                                             <dt>Name</dt>
-                                        <dd>{{ $order->kin_name }}</dd>
+                                        <dd><?php echo e($order->kin_name); ?></dd>
                                         <dt>Relationship</dt>
-                                        <dd>{{ $order->kin_relationship }}</dd>
+                                        <dd><?php echo e($order->kin_relationship); ?></dd>
                                         <dt> Phone</dt>
-                                        <dd>{{ $order->kin_phone }}</dd>
+                                        <dd><?php echo e($order->kin_phone); ?></dd>
                                         </div>
                                         <div class="col-md-4">
                                             <dt>Email</dt>
-                                        <dd>{{ $order->kin_email }}</dd>
+                                        <dd><?php echo e($order->kin_email); ?></dd>
                                         <dt>Address</dt>
-                                        <dd>{{ $order->kin_address }}</dd>
+                                        <dd><?php echo e($order->kin_address); ?></dd>
                                         <dt> City</dt>
-                                        <dd>{{ $order->kin_city }}</dd>
+                                        <dd><?php echo e($order->kin_city); ?></dd>
                                         </div>
                                         <div class="col-md-4">
                                             <dt>Preferred Location</dt>
-                                        <dd>{{ $order->preferred_location }}</dd>
+                                        <dd><?php echo e($order->preferred_location); ?></dd>
                                         <dt>Plot</dt>
-                                        <dd>{{ $order->plot }}</dd>
+                                        <dd><?php echo e($order->plot); ?></dd>
                                         <dt> Agent</dt>
-                                        <dd>{{ $order->agent }}</dd>
+                                        <dd><?php echo e($order->agent); ?></dd>
                                         </div>
                                         <div class="col-md-4">
                                             <dt> Date</dt>
-                                        <dd>{{ $order->created_at }}</dd>
+                                        <dd><?php echo e($order->created_at); ?></dd>
                                         <dt>Status</dt>
-                                        <dd>{{ $order->status }}</dd>
+                                        <dd><?php echo e($order->status); ?></dd>
                                         <dt> Transaction Reference</dt>
-                                        <dd>{{ $order->transaction_reference }}</dd>
+                                        <dd><?php echo e($order->transaction_reference); ?></dd>
                                         </div>
                                         <div class="col-md-4">
                                             <dt> ID Type</dt>
-                                        <dd>{{ $order->idtype }}</dd>
+                                        <dd><?php echo e($order->idtype); ?></dd>
                                         <dt>Card No:</dt>
-                                        <dd>{{ $order->idard }}</dd>
+                                        <dd><?php echo e($order->idard); ?></dd>
                                         <dt> Learn About</dt>
-                                        <dd>{{ $order->learn_about }}</dd>
+                                        <dd><?php echo e($order->learn_about); ?></dd>
                                         </div>
                                   
                                     
@@ -197,7 +197,8 @@
 <!-- /page content -->
 
 <!-- footer content -->
-@include('admin.backlayouts.menu_footer')
+<?php echo $__env->make('admin.backlayouts.menu_footer', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 <!-- /footer content -->
 </div>
 </div>
+<?php /**PATH C:\laravel\thronehomesltd\resources\views/admin/backlayouts/single_order.blade.php ENDPATH**/ ?>

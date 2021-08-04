@@ -1073,4 +1073,54 @@ class UserController extends Controller
             "title" => $generalinfo["title"]
         ]);
     }
+    public function getSingleOrder(Request $request, $id)
+    { {
+            $admin_id = auth()->user()->admin_id;
+            $order = Daomniorder::where(['admin_id' => $admin_id, "id" => $id])->first();
+
+            $admin_id = $this->regURL(); //this is determined by url owner while 1 = super admin
+            $generalinfo['user'] = Auth::user();
+            $user = Auth::user();
+            $generalinfo['siteinfos'] = $this->getSiteinfosextract($admin_id);
+            $generalinfo['totaladmins'] = User::where('role_id', 2)->orderBy('id', 'desc')->count('id');
+
+            $generalinfo['totalusers'] = User::where('role_id', 3)->orderBy('id', 'desc')->count('id');
+            $generalinfo['totalstaffs'] = User::where('role_id', 'NOT LIKE', 1)->where('role_id', 'NOT LIKE', 3)->orderBy('id', 'desc')->count('id');
+            $generalinfo['totaladmins'] = User::where('role_id', 2)->orderBy('id', 'desc')->count('id');
+            $generalinfo['total_lands'] = Daomniorder::where('id', '>', 0)->orderBy('id', 'desc')->count('id');
+            $generalinfo['total_houses'] = Daomniorder::where('id', '>', 0)->orderBy('id', 'desc')->count('id');
+            $generalinfo['total_lands_bought'] = 0;
+            $generalinfo['total_houses_bought'] = 0;
+            $generalinfo['total_instalment'] = 0;
+            $generalinfo['totalrevenue'] = Daomniorder::where('id', '>', 0)->sum('price_pay');
+
+            $user_role = $getRole = Daomnirole::where('id', Auth::user()->role_id)->value("role");
+            $generalinfo['title'] = '::' . ucfirst(strtolower($user_role)) . ' home';
+
+            $generalinfo['role'] = $user_role;
+
+            $generalinfo['total_lands'] = Daomniorder::where('id', '>', 0)->orderBy('id', 'desc')->count('id');
+            $generalinfo['lands'] = Daomnilandtypes::where('admin_id', $admin_id)->get();
+
+            $land_defails = Daomnilandtypes::select('lands_price', 'lands_name', 'lands_size', 'created_at')
+                ->where(['admin_id' => $admin_id["admin_id"], "page_name" => "Lands"])
+                ->get();
+
+
+
+            return view('admin/single_order', [
+                "order" => $order,
+                "generalinfo" => $generalinfo, "role" => $user_role, "user" => $user,
+                "totaladmins" => $generalinfo['totaladmins'], "totalstaffs" => $generalinfo["totalstaffs"],
+                "totalusers" => $generalinfo["totalusers"], "total_lands" => $generalinfo["total_lands"],
+                "total_lands_bought" => $generalinfo["total_lands_bought"],
+                "total_houses" => $generalinfo["total_houses"],
+                "total_houses_bought" => $generalinfo["total_houses_bought"],
+                "total_instalment" => $generalinfo["total_instalment"],
+                "totalrevenue" => $generalinfo["totalrevenue"],
+                "siteinfos" => $generalinfo["siteinfos"],
+                "title" => $generalinfo["title"]
+            ]);
+        }
+    }
 }

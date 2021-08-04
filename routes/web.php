@@ -106,7 +106,8 @@ Route::get('/my_lands/{name}', 'UserController@myLands')->name('my_lands')->midd
 Route::get('/my_house/{name}', 'UserController@myHouse')->name('my_house')->middleware('auth');
 
 Route::get('/users', 'UserController@getAllUsers')->name('users')->middleware('auth');
-Route::get('orders', 'UserController@getAllOrders')->name('orders')->middleware('auth');
+Route::get('/orders', 'UserController@getAllOrders')->name('orders')->middleware('auth');
+Route::get('/orders/{id}', 'UserController@getSingleOrder')->name('orders')->middleware('auth');
 Route::get('/contacts', 'UserController@getAllContacts')->name('contacts')->middleware('auth');
 
 //admin
